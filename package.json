@@ -1,6 +1,7 @@
 {
     "name": "quizzy",
     "version": "0.1.0",
+    "type": "commonjs",
     "scripts": {
         "start": "ijl-cli server --port=8099 --with-open-browser",
         "build": "npm run clean && ijl-cli build --dev",
