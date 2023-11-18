@@ -4,9 +4,9 @@ module.exports = antfu(
   {},
   {
     rules: {
-      "curly": ["error", "all"],
-      "style/brace-style": ["error", "1tbs"],
-      "ts/consistent-type-definitions": ["error", "type"],
+      'curly': ['error', 'all'],
+      'style/brace-style': ['error', '1tbs'],
+      'ts/consistent-type-definitions': ['error', 'type'],
     },
   },
 )

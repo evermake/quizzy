@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 export const QuizItemWrapper = styled.div`
   padding: 35px 0 20px 20px;

@@ -1,12 +1,12 @@
-import React from 'react';
-import {ErrorpageTitle} from "./styled";
+import React from 'react'
+import { ErrorpageTitle } from './styled'
 
-const Errorpage = () => {
-    return (
-        <ErrorpageTitle>
-            Page not found.
-        </ErrorpageTitle>
-    );
-};
+const Errorpage: React.FC = () => {
+  return (
+    <ErrorpageTitle>
+      Page not found.
+    </ErrorpageTitle>
+  )
+}
 
-export default Errorpage;
+export default Errorpage

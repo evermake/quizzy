@@ -1,29 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from './app';
+import App from './app'
 
-export default () => <App/>;
+export default () => <App />
 
 let rootElement: ReactDOM.Root
 
-export const mount = (
-  Component: React.Factory<unknown>, 
-  element?: Element,
-) => {
+export function mount(Component: React.Factory<unknown>, element?: Element) {
   if (!element) {
-    element = document.getElementById('app');
+    element = document.getElementById('app')
   }
-  rootElement = ReactDOM.createRoot(element);
-  rootElement.render(<Component/>);
+  rootElement = ReactDOM.createRoot(element)
+  rootElement.render(<Component />)
 
   if (module.hot) {
-    module.hot.accept('./app', ()=> {
-      rootElement.render(<Component/>);
+    module.hot.accept('./app', () => {
+      rootElement.render(<Component />)
     })
   }
-};
+}
 
-export const unmount = () => {
-  rootElement.unmount();
-};
+export function unmount() {
+  rootElement.unmount()
+}
