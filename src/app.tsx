@@ -1,18 +1,28 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { getNavigationsValue } from '@ijl/cli'
-import Layout from './components/layout/Layout'
-import Homepage from './pages/Homepage'
-import Errorpage from './pages/error/Errorpage'
+import Layout from '@/components/Layout/Layout'
+import Home from '@/pages/Home'
+import Login from '@/pages/Login'
+import ErrorPage from '@/pages/ErrorPage'
+import QuizDetail from '@/pages/QuizDetail'
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
       element: <Layout />,
-      errorElement: <Errorpage />,
+      errorElement: <ErrorPage />,
       children: [
-        { index: true, element: <Homepage /> },
+        { index: true, element: <Home /> },
+        {
+          path: '/login',
+          element: <Login />,
+        },
+        {
+          path: '/quizzes/:quizSlug',
+          element: <QuizDetail />,
+        },
       ],
     },
   ],

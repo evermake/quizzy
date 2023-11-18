@@ -1,14 +1,14 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Header from '../header'
-import { Wrapper } from './styled'
+import { RootStyled } from './Layout.styled'
+import Header from '@/components/Header'
 
 const Layout: React.FC = () => {
   return (
-    <Wrapper>
+    <RootStyled>
       <Header />
       <Outlet />
-    </Wrapper>
+    </RootStyled>
   )
 }
 
