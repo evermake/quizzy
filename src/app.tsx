@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { getNavigationsValue } from '@ijl/cli'
-import Layout from '@/components/Layout/Layout'
+import Layout from '@/components/Layout'
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import ErrorPage from '@/pages/ErrorPage'
