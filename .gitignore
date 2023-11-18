@@ -2,5 +2,6 @@ node_modules
 
 .DS_Store
 
-.vscode
+.vscode/*
+!.vscode/settings.template.json
 .idea

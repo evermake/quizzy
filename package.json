@@ -3,6 +3,8 @@
     "version": "0.1.0",
     "type": "commonjs",
     "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "start": "ijl-cli server --port=8099 --with-open-browser",
         "build": "npm run clean && ijl-cli build --dev",
         "build:prod": "npm run clean && ijl-cli build",
@@ -20,8 +22,10 @@
         "react-router-dom": "^6.19.0"
     },
     "devDependencies": {
+        "@antfu/eslint-config": "^1.2.1",
         "@types/react": "^18.2.37",
         "@types/react-dom": "^18.2.15",
+        "eslint": "^8.54.0",
         "typescript": "^5.2.2"
     },
     "main": "./src/index.tsx"
