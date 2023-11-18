@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 export const ErrorpageTitle = styled.h2`
   color: #BFBFBF;

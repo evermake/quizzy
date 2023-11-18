@@ -1,20 +1,19 @@
-import React from 'react';
-import QuizItem from "./quizitem/QuizItem";
+import React from 'react'
+import QuizItem from './quizitem/QuizItem'
 
-const QuizList = () => {
+const QuizList: React.FC = () => {
+  const data = [
+    { name: 'Quiz', status: 'starts soon...' },
+    { name: 'Quiz 2', status: 'done' },
+  ]
 
-    const data = [
-        {name: 'Quiz', status: 'starts soon...'},
-        {name: 'Quiz 2', status: 'done'},
-    ]
-
-    return (
-        <>
-            {
-                data.map(quiz => <QuizItem key={quiz.name} name={quiz.name} status={quiz.status}/>)
+  return (
+    <>
+      {
+                data.map(quiz => <QuizItem key={quiz.name} name={quiz.name} status={quiz.status} />)
             }
-        </>
-    );
-};
+    </>
+  )
+}
 
-export default QuizList;
+export default QuizList

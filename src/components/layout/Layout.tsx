@@ -1,15 +1,15 @@
-import React from 'react';
-import Header from "../header";
-import {Outlet} from "react-router-dom";
-import {Wrapper} from "./styled";
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import Header from '../header'
+import { Wrapper } from './styled'
 
-const Layout = () => {
-    return (
-        <Wrapper>
-            <Header/>
-            <Outlet/>
-        </Wrapper>
-    );
-};
+const Layout: React.FC = () => {
+  return (
+    <Wrapper>
+      <Header />
+      <Outlet />
+    </Wrapper>
+  )
+}
 
-export default Layout;
+export default Layout
