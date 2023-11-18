@@ -1,4 +1,5 @@
 const process = require('node:process')
+const path = require('node:path')
 const pkg = require('./package')
 
 module.exports = {
@@ -6,6 +7,11 @@ module.exports = {
   webpackConfig: {
     output: {
       publicPath: `/static/${pkg.name}/${process.env.VERSION || pkg.version}/`,
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
   },
   navigations: {
