@@ -5,3 +5,5 @@ node_modules
 .vscode/*
 !.vscode/settings.template.json
 .idea
+
+dist
