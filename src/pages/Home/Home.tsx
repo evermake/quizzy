@@ -1,11 +1,11 @@
 import React from 'react'
-import QuizList from '../components/QuizList'
+import QuizzesList from '@/components/QuizzesList'
 
 const Homepage: React.FC = () => {
   return (
     <>
       <h1>Quizzes</h1>
-      <QuizList />
+      <QuizzesList />
     </>
   )
 }

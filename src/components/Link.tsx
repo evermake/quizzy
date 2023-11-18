@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export const StyledLink = styled(NavLink)`
+export default styled(Link)`
   color: #333;
   text-align: center;
   font-family: Inter, sans-serif;
@@ -10,13 +10,15 @@ export const StyledLink = styled(NavLink)`
   font-weight: 400;
   line-height: normal;
   text-decoration: none;
-  : hover {
+
+  &:hover {
     color: #6A9B59;
     .a {
       color: #6A9B59;
     }
   }
-  :active {
+
+  &:active {
     color: #417D2B;
   }
 `

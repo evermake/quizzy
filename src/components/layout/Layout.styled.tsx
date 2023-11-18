@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
 
-export const Wrapper = styled.div`
+export const RootStyled = styled.div`
   margin: 0 220px;
 `

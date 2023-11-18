@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledHeader = styled.nav`
+export const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 22px 0;
