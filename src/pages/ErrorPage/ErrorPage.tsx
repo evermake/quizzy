@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRouteError } from 'react-router-dom'
 import { SubtitleStyled, TitleStyled } from './styled'
 
