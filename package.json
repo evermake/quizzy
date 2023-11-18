@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "ijl-cli server --port=8099 --with-open-browser",
+    "dev": "ijl-cli server --port=8099 --with-open-browser",
     "build": "npm run clean && ijl-cli build --dev",
     "build:prod": "npm run clean && ijl-cli build",
     "clean": "rimraf dist"
