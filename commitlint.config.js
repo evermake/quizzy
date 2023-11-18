@@ -31,6 +31,7 @@ module.exports = {
         'test',
         'style',
         'ci',
+        'release',
       ],
     ],
   },
