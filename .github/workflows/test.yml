@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   push:
@@ -28,3 +28,23 @@ jobs:
 
       - name: Lint
         run: nr lint
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
+      - name: Build
+        run: nr build:prod
