@@ -1,0 +1,24 @@
+{
+  "status": {
+    "code": 0
+  },
+  "data": {
+    "quizzes": [
+      {
+        "id": 1,
+        "name": "Quiz",
+        "status": "starts soon..."
+      },
+      {
+        "id": 2,
+        "name": "Quiz 2",
+        "status": "done"
+      },
+      {
+        "id": 3,
+        "name": "Computer Architecture Quiz",
+        "status": "in process"
+      }
+    ]
+  }
+}
