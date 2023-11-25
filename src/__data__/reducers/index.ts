@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import { quizzesList } from './quizzes-list';
+import { quizzesList } from './quizzes-list'
 
 export default combineReducers({
-    quizzesList,
-});
+  quizzesList,
+})

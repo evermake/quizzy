@@ -1,24 +1,24 @@
-export interface AsyncDataState<T, E = string> {
-    loading: boolean;
-    data?: T;
-    error?: E;
+export type AsyncDataState<T, E = string> = {
+  loading: boolean
+  data?: T
+  error?: E
 }
 
-export interface QuizListRequest {
-    status: Status;
-    data: Data;
+export type QuizListRequest = {
+  status: Status
+  data: Data
 }
 
-export interface Data {
-    quizList: Array<QuizListItem>
+export type Data = {
+  quizList: Array<QuizListItem>
 }
 
-export interface QuizListItem {
-    id: number;
-    name: string;
-    status: "starts soon..." | "done" | "in process";
+export type QuizListItem = {
+  id: number
+  name: string
+  status: 'starts soon...' | 'done' | 'in process'
 }
 
-interface Status {
-    code: number;
+type Status = {
+  code: number
 }

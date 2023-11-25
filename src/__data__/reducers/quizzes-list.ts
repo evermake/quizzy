@@ -1,38 +1,45 @@
-import { MAIN_DATA_FETCH_SUCCESS, MAIN_DATA_FETCH, MAIN_DATA_FETCH_FAIL } from '@/__data__/constants/actions-types';
-import { AsyncDataState, QuizListRequest, Data } from '../model/interfaces';
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux'
+import type { AsyncDataState, Data, QuizListRequest } from '../model/interfaces'
+import { MAIN_DATA_FETCH, MAIN_DATA_FETCH_FAIL, MAIN_DATA_FETCH_SUCCESS } from '@/__data__/constants/actions-types'
 
-type MainDataState = Partial<QuizListRequest> & AsyncDataState<Data>;
+type MainDataState = Partial<QuizListRequest> & AsyncDataState<Data>
 
 const initialState: MainDataState = {
-    data: null,
-    loading: false,
-    error: null
-};
+  data: null,
+  loading: false,
+  error: null,
+}
 
-const fetchHandler = (state: MainDataState, action: AnyAction): MainDataState => ({
+function fetchHandler(state: MainDataState, _action: AnyAction): MainDataState {
+  return {
     ...state,
     loading: true,
-});
+  }
+}
 
-const fetchSuccessHandler = (state: MainDataState, action: AnyAction): MainDataState => ({
+function fetchSuccessHandler(state: MainDataState, action: AnyAction): MainDataState {
+  return {
     ...state,
-    data: action.data!.data,
+    data: action.data,
     loading: false,
-});
+  }
+}
 
-const fetchErrorHandler = (state: MainDataState, action: AnyAction): MainDataState => ({
+function fetchErrorHandler(state: MainDataState, action: AnyAction): MainDataState {
+  return {
     ...state,
     data: null,
     loading: false,
-    error: action.error || true
-});
+    error: action.error || true,
+  }
+}
 
 const handlers = {
-    [MAIN_DATA_FETCH]: fetchHandler,
-    [MAIN_DATA_FETCH_SUCCESS]: fetchSuccessHandler,
-    [MAIN_DATA_FETCH_FAIL]: fetchErrorHandler
-};
+  [MAIN_DATA_FETCH]: fetchHandler,
+  [MAIN_DATA_FETCH_SUCCESS]: fetchSuccessHandler,
+  [MAIN_DATA_FETCH_FAIL]: fetchErrorHandler,
+}
 
-export const quizzesList = (state: MainDataState = initialState, action: AnyAction) =>
-    Object.prototype.hasOwnProperty.call(handlers, action.type) ? handlers[action.type](state, action) : state;
+export function quizzesList(state: MainDataState = initialState, action: AnyAction) {
+  return Object.prototype.hasOwnProperty.call(handlers, action.type) ? handlers[action.type](state, action) : state
+}

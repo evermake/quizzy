@@ -1,25 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const router = require("express").Router();
+const router = require('express').Router()
+const { sleep, loadJson } = require('./utils.js')
 
-router.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://b2.inno-js.ru");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-const loadJson = (filepath, encoding = "utf8") =>
-    JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, `${filepath}.json`), { encoding })
-    );
-
-router.get("/getQuizzesList", (req, res) => {
-    setTimeout(() => {
-        const data = loadJson('./getQuizzesList')
-        res.send(
-            data
-        );
-    }, 1000)
-});
+router.get('/getQuizzesList', async (_, res) => {
+  await sleep(1000)
+  const quizzes = await loadJson('quizzes.json')
+  res.status(200)
+  res.send(quizzes)
+})
 
 module.exports = router

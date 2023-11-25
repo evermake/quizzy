@@ -1,46 +1,52 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getConfig } from '@ijl/cli';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
+import { getConfigValue } from '@ijl/cli'
 
-import { QuizListRequest } from '../model/interfaces';
+import type { QuizListRequest } from '../model/interfaces'
 import {
-    MAIN_DATA_FETCH,
-    MAIN_DATA_FETCH_SUCCESS,
-    MAIN_DATA_FETCH_FAIL
-} from '../constants/actions-types';
+  MAIN_DATA_FETCH,
+  MAIN_DATA_FETCH_FAIL,
+  MAIN_DATA_FETCH_SUCCESS,
+} from '../constants/actions-types'
 
-const getFetchAction = () => ({
+function getFetchAction() {
+  return {
     type: MAIN_DATA_FETCH,
-});
+  }
+}
 
-const getSuccessAction = (data) => ({
+function getSuccessAction(data) {
+  return {
     type: MAIN_DATA_FETCH_SUCCESS,
-    data
-});
+    data,
+  }
+}
 
-const getErrorAction = () => ({
+function getErrorAction() {
+  return {
     type: MAIN_DATA_FETCH_FAIL,
-});
+  }
+}
 
 export default () => async (dispatch: any) => {
-    dispatch(getFetchAction());
+  dispatch(getFetchAction())
 
-    const requestProps: AxiosRequestConfig = {
-        method: 'get',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    };
-    const mainApiBaseUrl = getConfig()['quizzy.api.base.url'];
-    try {
-        const answer: AxiosResponse<QuizListRequest> = await axios(`${mainApiBaseUrl}/getQuizzesList`, requestProps);
+  const requestProps: AxiosRequestConfig = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const mainApiBaseUrl = getConfigValue('quizzy.api.base.url')
+  try {
+    const answer: AxiosResponse<QuizListRequest> = await axios(`${mainApiBaseUrl}/getQuizzesList`, requestProps)
 
-        if (answer.data?.status?.code === 0) {
-            dispatch(getSuccessAction(answer.data));
-        } else {
-            dispatch(getErrorAction());
-        }
-
-    } catch (error) {
-        dispatch(getErrorAction());
+    if (answer.status >= 200 && answer.status < 300) {
+      dispatch(getSuccessAction(answer.data))
+    } else {
+      dispatch(getErrorAction())
     }
-};
+  } catch (error) {
+    dispatch(getErrorAction())
+  }
+}

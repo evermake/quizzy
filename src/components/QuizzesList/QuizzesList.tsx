@@ -1,7 +1,15 @@
 import React from 'react'
 import ListItem from './ListItem'
 
-const QuizList: React.FC = ({quizzes}) => {
+export type QuizListProps = {
+  quizzes: {
+    name: string
+    slug: string
+    description: string
+  }[]
+}
+
+const QuizList: React.FC<QuizListProps> = ({ quizzes }) => {
   return (
     <>
       {quizzes.map(quiz => (
