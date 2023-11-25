@@ -1,23 +1,18 @@
 import React from 'react'
 import ListItem from './ListItem'
 
-const QuizList: React.FC = () => {
-  const data = [
-    {
-      name: 'Quiz',
-      slug: '1',
-      description: 'starts soon...',
-    },
-    {
-      name: 'Quiz 2',
-      slug: '2',
-      description: 'done',
-    },
-  ]
+export type QuizListProps = {
+  quizzes: {
+    name: string
+    slug: string
+    description: string
+  }[]
+}
 
+const QuizList: React.FC<QuizListProps> = ({ quizzes }) => {
   return (
     <>
-      {data.map(quiz => (
+      {quizzes.map(quiz => (
         <ListItem
           key={quiz.slug}
           slug={quiz.slug}

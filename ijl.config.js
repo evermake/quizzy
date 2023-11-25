@@ -23,6 +23,6 @@ module.exports = {
     },
   },
   config: {
-    key: 'value',
+    'quizzy.api.base.url': '/api',
   },
 }
