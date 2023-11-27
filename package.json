@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "workspaces": [
+    "quizzy",
+    "quizzy-react"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.1.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "eslint": "^8.54.0",
+    "lint-staged": "^15.1.0",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.3.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
