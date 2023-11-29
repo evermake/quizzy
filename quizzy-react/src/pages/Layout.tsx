@@ -1,10 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Header from "~/containers/header";
 
 export const Layout: React.FC = () => {
   return (
     <div>
-      <header>header</header>
+      <header><Header/></header>
       <main>
         <Outlet />
       </main>

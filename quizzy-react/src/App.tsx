@@ -5,6 +5,8 @@ import { LoginPage } from '~/pages/LoginPage'
 import { ErrorPage } from '~/pages/ErrorPage'
 import { QuizDetailPage } from '~/pages/QuizDetailPage'
 import { QuizListPage } from '~/pages/QuizListPage'
+import {store} from "~/store";
+import {Provider} from "react-redux";
 
 const router = createBrowserRouter(
   [
@@ -36,7 +38,9 @@ const router = createBrowserRouter(
 export default function App() {
   return (
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.StrictMode>
   )
 }

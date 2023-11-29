@@ -1,0 +1,22 @@
+{
+  "user": {
+    "id" : 1,
+    "name" : "UserName"
+  },
+  "quizzes": [
+    {
+      "id": 1,
+      "title": "Quiz 1",
+      "descr": "descr for quiz 1",
+      "opensAt": "2023-11-29T16:00:00",
+      "closesAt": "2023-12-30T16:00:00"
+    },
+    {
+      "id": 2,
+      "title": "CompArch quiz",
+      "descr": "quiz dedicated to RAM",
+      "opensAt": "2023-12-04T16:00:00",
+      "closesAt": "2023-12-30T16:00:00"
+    }
+  ]
+}
