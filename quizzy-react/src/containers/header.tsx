@@ -18,7 +18,7 @@ const Header = () => {
                 Home
             </div>
             <div>
-                {user.name}
+                {user ? user.name : "Login"}
             </div>
         </div>
     );

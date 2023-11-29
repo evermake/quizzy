@@ -1,14 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query/react'
+import {configureStore} from '@reduxjs/toolkit'
+import {setupListeners} from '@reduxjs/toolkit/query/react'
 import {userService} from "~/services/userService";
+import {quizService} from "~/services/quizService";
 
 export const store = configureStore({
     reducer: {
-        [userService.reducerPath]: userService.reducer
+        [userService.reducerPath]: userService.reducer,
+        [quizService.reducerPath]: quizService.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(
-            userService.middleware
+            userService.middleware,
+            quizService.middleware,
         )
 })
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { api } from '~/api/client'
+import QuizList from "~/containers/quizList";
 
 export const QuizListPage: React.FC = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ export const QuizListPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Quiz List</h1>
+      <QuizList/>
     </div>
   )
 }
