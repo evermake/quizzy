@@ -7,11 +7,12 @@ import { QuizDetailPage } from '~/pages/QuizDetailPage'
 import { QuizListPage } from '~/pages/QuizListPage'
 import {store} from "~/store";
 import {Provider} from "react-redux";
+import {AppRoute} from "~/constants";
 
 const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: AppRoute.HOME,
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [
@@ -20,18 +21,18 @@ const router = createBrowserRouter(
           element: <QuizListPage />,
         },
         {
-          path: '/login',
+          path: AppRoute.LOGIN,
           element: <LoginPage />,
         },
         {
-          path: '/quizzes/:slug',
+          path: AppRoute.QUIZZES + AppRoute.SLUG,
           element: <QuizDetailPage />,
         },
       ],
     },
   ],
   {
-    basename: '/',
+    basename: AppRoute.BASENAME,
   },
 )
 

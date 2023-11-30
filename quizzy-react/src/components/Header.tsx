@@ -1,8 +1,10 @@
 import React from 'react';
 import {useGetUserQuery} from "~/services/userService";
+import {Link} from "react-router-dom";
+import {AppRoute} from "~/constants";
 
 const Header = () => {
-    const { data : user, error, isLoading } = useGetUserQuery()
+    const {data: user, error, isLoading} = useGetUserQuery()
 
     if (error) {
         return <div>Error: {error}</div>
@@ -14,12 +16,12 @@ const Header = () => {
 
     return (
         <div>
-            <div>
+            <Link to={AppRoute.HOME}>
                 Home
-            </div>
-            <div>
-                {user ? user.name : "Login"}
-            </div>
+            </Link>
+            {user
+                ? <div>{user.name}</div>
+                : <Link to={AppRoute.LOGIN}>Login</Link>}
         </div>
     );
 };

@@ -1,5 +1,7 @@
 import React from 'react';
 import {useGetQuizzesQuery} from "~/services/quizService";
+import {Link} from "react-router-dom";
+import {AppRoute} from "~/constants";
 
 const QuizList = () => {
 
@@ -16,11 +18,11 @@ const QuizList = () => {
     return (
         <div>
             {quizList.map(quiz =>
-                <div key={quiz.id}>
-                    {quiz.title} |
-                    {quiz.opensAt} |
-                    {quiz.closesAt}
-                </div>
+                <Link key={quiz.id} to={AppRoute.QUIZZES + '/' + quiz.id}>
+                    <div>
+                        {quiz.title}
+                    </div>
+                </Link>
             )}
         </div>
     );

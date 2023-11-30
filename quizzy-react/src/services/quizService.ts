@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {User} from "~/models/user";
+import {Quiz} from "~/models/quiz";
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -7,10 +8,13 @@ export const quizService = createApi({
     reducerPath: 'quizService',
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     endpoints: build => ({
-        getQuizzes: build.query<User, void>({
+        getQuizzes: build.query<Quiz[], void>({
             query: () => '/quizzes',
+        }),
+        getQuizById: build.query<Quiz, string>({
+            query: (slug) => `/quizzes/${slug}`,
         }),
     }),
 })
 
-export const { useGetQuizzesQuery } = quizService
+export const { useGetQuizzesQuery, useGetQuizByIdQuery } = quizService

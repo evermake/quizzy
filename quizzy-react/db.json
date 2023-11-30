@@ -1,22 +1,57 @@
 {
   "user": {
-    "id" : 1,
-    "name" : "UserName"
+    "id": 1,
+    "name": "UserName"
   },
   "quizzes": [
     {
       "id": 1,
-      "title": "Quiz 1",
-      "descr": "descr for quiz 1",
+      "title": "JS Quiz",
+      "descr": "Check knowledge of basic JS",
       "opensAt": "2023-11-29T16:00:00",
-      "closesAt": "2023-12-30T16:00:00"
+      "closesAt": "2023-12-30T16:00:00",
+      "questionIds": [1, 2, 3]
     },
     {
       "id": 2,
       "title": "CompArch quiz",
       "descr": "quiz dedicated to RAM",
       "opensAt": "2023-12-04T16:00:00",
-      "closesAt": "2023-12-30T16:00:00"
+      "closesAt": "2023-12-30T16:00:00",
+      "questionIds": []
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "content": "How do you create a function in JavaScript?",
+      "type": "option",
+      "answers": [
+        "function = myFunction()",
+        "function myFunction()",
+        "void myFunction()",
+        "def foo()"
+      ],
+      "correctAnswer": "function myFunction()"
+    },
+    {
+      "id": 2,
+      "content": "How to write an IF statement in JavaScript?",
+      "type": "option",
+      "answers": [
+        "if i === 5",
+        "if i === 5 then",
+        "if (i === 5)",
+        "if (i === 5) then"
+      ],
+      "correctAnswer": "if (i === 5)"
+    },
+    {
+      "id": 3,
+      "content": "... extends JavaScript by adding types to the language. What this?",
+      "type": "short",
+      "answers": [],
+      "correctAnswer": "typescript"
     }
   ]
 }
