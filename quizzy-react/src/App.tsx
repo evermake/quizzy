@@ -1,4 +1,5 @@
-import React from 'react'
+import '@mantine/core/styles.css'
+
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { DEFAULT_THEME, MantineProvider } from '@mantine/core'
 import { Layout } from '~/pages/Layout'
@@ -6,7 +7,6 @@ import { LoginPage } from '~/pages/LoginPage'
 import { ErrorPage } from '~/pages/ErrorPage'
 import { QuizDetailPage } from '~/pages/QuizDetailPage'
 import { QuizListPage } from '~/pages/QuizListPage'
-import '@mantine/core/styles.css'
 
 const router = createBrowserRouter(
   [

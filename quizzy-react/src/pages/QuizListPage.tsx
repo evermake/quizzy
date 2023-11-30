@@ -1,3 +1,4 @@
+import { Button } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { api } from '~/api/client'
 
@@ -12,6 +13,7 @@ export const QuizListPage: React.FC = () => {
   return (
     <div>
       <h1>Quiz List</h1>
+      <Button>Click me!</Button>
     </div>
   )
 }
