@@ -1,10 +1,12 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { DEFAULT_THEME, MantineProvider } from '@mantine/core'
 import { Layout } from '~/pages/Layout'
 import { LoginPage } from '~/pages/LoginPage'
 import { ErrorPage } from '~/pages/ErrorPage'
 import { QuizDetailPage } from '~/pages/QuizDetailPage'
 import { QuizListPage } from '~/pages/QuizListPage'
+import '@mantine/core/styles.css'
 
 const router = createBrowserRouter(
   [
@@ -35,8 +37,8 @@ const router = createBrowserRouter(
 
 export default function App() {
   return (
-    <React.StrictMode>
+    <MantineProvider theme={DEFAULT_THEME}>
       <RouterProvider router={router} />
-    </React.StrictMode>
+    </MantineProvider>
   )
 }

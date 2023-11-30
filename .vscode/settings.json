@@ -37,5 +37,12 @@
     "json",
     "jsonc",
     "yaml"
+  ],
+  "cssVariables.lookupFiles": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.less",
+    "node_modules/@mantine/core/esm/index.css"
   ]
 }
