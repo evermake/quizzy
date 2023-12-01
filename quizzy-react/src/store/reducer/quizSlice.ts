@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: QuizState = {
     status: QuizStatus.NOT_STARTED,
-    time: 120
+    time: 10
 };
 
 const quizSlice = createSlice({

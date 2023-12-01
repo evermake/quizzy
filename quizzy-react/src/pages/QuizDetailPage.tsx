@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useGetQuizByIdQuery} from "~/services/quizService";
 import Question from "~/components/Question";
@@ -8,6 +8,7 @@ import Timer from "~/components/Timer";
 import {useAppDispatch, useAppSelector} from "~/store";
 import {updateStatus} from "~/store/reducer/quizSlice";
 import {QuizStatus} from "~/types/state/quiz";
+import Results from "~/components/Results";
 
 export const QuizDetailPage: React.FC = () => {
 
@@ -24,7 +25,14 @@ export const QuizDetailPage: React.FC = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const dispatch = useAppDispatch();
 
-    const { status } = useAppSelector((state) => state.quizState);
+    const { status, time } = useAppSelector((state) => state.quizState);
+
+    useEffect(() => {
+        if (time < 0) {
+            dispatch(updateStatus(QuizStatus.FINISHED))
+        }
+    }, [time]);
+
 
     const handleStartClickBtn = () => {
         setQuestionId(quiz.questionIds[0])
@@ -68,10 +76,6 @@ export const QuizDetailPage: React.FC = () => {
     }
 
     if (status === QuizStatus.FINISHED) {
-        return <div>
-            <h2>Results</h2>
-            {Object.values(userAnswers).map((answer, idx)=>
-                <div>#{idx + 1}: {answer}</div>)}
-        </div>
+        return <Results userAnswers={userAnswers}/>
     }
 }
