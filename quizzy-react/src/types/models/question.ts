@@ -3,5 +3,5 @@ export interface Question {
     content: string,
     type: string,
     answers: string[],
-    correctAnswer: string
+    correctAnswer: string,
 }

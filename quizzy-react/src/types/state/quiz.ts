@@ -7,7 +7,8 @@ export enum QuizStatus {
 
 export interface QuizState {
     status: QuizStatus.NOT_STARTED | QuizStatus.IN_PROGRESS | QuizStatus.FINISHED;
-    time: number;
-    // currentQuestionId: number;
-    // answers: string[];
+    userAnswers: {};
+    time?: number;
+    currentQuestionId?: number;
+    paginationId?: number;
 }

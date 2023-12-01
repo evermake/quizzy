@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: QuizState = {
     status: QuizStatus.NOT_STARTED,
-    time: 10
+    userAnswers: []
 };
 
 const quizSlice = createSlice({
@@ -16,12 +16,24 @@ const quizSlice = createSlice({
         updateTime: (state, action: PayloadAction<number>) => {
             state.time = action.payload;
         },
+        updateQuestionId: (state, action: PayloadAction<number>) => {
+            state.questionId = action.payload;
+        },
+        updatePaginationId: (state, action: PayloadAction<number>) => {
+            state.paginationId = action.payload;
+        },
+        updateUserAnswer: (state, action: PayloadAction<number>) => {
+            state.userAnswers[state.paginationId] = action.payload;
+        },
     },
 });
 
 export const {
     updateTime,
-    updateStatus
+    updateStatus,
+    updateQuestionId,
+    updatePaginationId,
+    updateUserAnswer,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

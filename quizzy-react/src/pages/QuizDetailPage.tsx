@@ -6,7 +6,7 @@ import QuizDetails from "~/components/QuizDetails";
 import QuestionPagination from "~/components/QuestionPagination";
 import Timer from "~/components/Timer";
 import {useAppDispatch, useAppSelector} from "~/store";
-import {updateStatus} from "~/store/reducer/quizSlice";
+import {updatePaginationId, updateQuestionId, updateStatus, updateTime} from "~/store/reducer/quizSlice";
 import {QuizStatus} from "~/types/state/quiz";
 import Results from "~/components/Results";
 
@@ -14,17 +14,17 @@ export const QuizDetailPage: React.FC = () => {
 
     const {slug} = useParams()
 
-    const [questionId, setQuestionId] = useState();
-
-    const {data: quiz, error, isLoading} = useGetQuizByIdQuery(slug, questionId)
+    const {data: quiz, error, isLoading} = useGetQuizByIdQuery(slug)
 
     const [userAnswers, setUserAnswers] = useState({});
     const dispatch = useAppDispatch();
 
-    const { status } = useAppSelector((state) => state.quizState);
+    const {status, questionId} = useAppSelector((state) => state.quizState);
 
     const handleStartClickBtn = () => {
-        setQuestionId(quiz.questionIds[0])
+        dispatch(updateQuestionId(quiz.questionIds[0]))
+        dispatch(updatePaginationId(0))
+        dispatch(updateTime(quiz.duration || 600))
         dispatch(updateStatus(QuizStatus.IN_PROGRESS))
     }
 
@@ -50,21 +50,17 @@ export const QuizDetailPage: React.FC = () => {
         )
     }
 
-    if (!questionId) {
-        return <>No such question!</>
-    }
-
     if (status === QuizStatus.IN_PROGRESS && questionId) {
 
-        return <div>
+        return (<div>
             <Timer/>
-            <Question id={questionId} submitAnswer={submitAnswer}/>
-            <QuestionPagination quiz={quiz} setQuestionId={setQuestionId}/>
+            <Question/>
+            <QuestionPagination quiz={quiz}/>
             <button onClick={handleFinishClickBtn}>Finish attempt</button>
-        </div>
+        </div>)
     }
 
     if (status === QuizStatus.FINISHED) {
-        return <Results userAnswers={userAnswers}/>
+        return <Results questionIds={quiz.questionIds} userAnswers={userAnswers}/>
     }
 }

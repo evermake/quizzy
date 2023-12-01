@@ -7,4 +7,5 @@ export interface Quiz {
     "opensAt": string,
     "closesAt": string,
     "questionIds": number[]
+    "duration": number
 }

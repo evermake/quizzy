@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {useGetQuestionByIdQuery} from "~/services/questionService";
+import {useAppDispatch, useAppSelector} from "~/store";
+import {updateUserAnswer} from "~/store/reducer/quizSlice";
 
-const Question = ({id, submitAnswer}) => {
+const Question = () => {
 
-    const {data: question, error, isLoading} = useGetQuestionByIdQuery(id)
+    const {questionId} = useAppSelector((state) => state.quizState);
+
+    const {data: question, error, isLoading} = useGetQuestionByIdQuery(questionId)
+    const dispatch = useAppDispatch();
+
     const [userAnswer, setAnswer] = useState<string>("");
-
-    const proceedAnswer = () => {
-        if (question.answers.includes(userAnswer)) {
-            submitAnswer(userAnswer)
-        }
-    }
 
     if (isLoading) {
         return <>Loading...</>
@@ -29,11 +29,13 @@ const Question = ({id, submitAnswer}) => {
             <>{question.content}</>
             <ul>
                 {question.answers.map(answer =>
-                    <li key={answer} onClick={() => setAnswer(answer)}>{answer}</li>
+                    <li key={answer} onClick={() => {
+                        setAnswer(answer)
+                        dispatch(updateUserAnswer(answer))
+                    }}>{answer}</li>
                 )}
             </ul>
             <div>Current answer: {userAnswer}</div>
-            <button onClick={proceedAnswer}>Submit answer</button>
         </>
     }
 
@@ -41,9 +43,10 @@ const Question = ({id, submitAnswer}) => {
         return <div>
             <div>{question.content}</div>
             <div>
-                Current answer: <input onChange={(event) => setAnswer(event.target.value)}></input>
+                Current answer: <input onChange={(event) => {
+                dispatch(updateUserAnswer(event.target.value))
+            }}></input>
             </div>
-            <button onClick={proceedAnswer}>Submit answer</button>
         </div>
     }
 };
