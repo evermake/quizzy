@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {User} from "~/models/user";
-import {Quiz} from "~/models/quiz";
+import {User} from "~/types/models/user";
+import {Quiz} from "~/types/models/quiz";
 
 const BASE_URL = 'http://localhost:3000'
 

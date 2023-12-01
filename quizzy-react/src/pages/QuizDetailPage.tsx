@@ -4,6 +4,10 @@ import {useGetQuizByIdQuery} from "~/services/quizService";
 import Question from "~/components/Question";
 import QuizDetails from "~/components/QuizDetails";
 import QuestionPagination from "~/components/QuestionPagination";
+import Timer from "~/components/Timer";
+import {useAppDispatch, useAppSelector} from "~/store";
+import {updateStatus} from "~/store/reducer/quizSlice";
+import {QuizStatus} from "~/types/state/quiz";
 
 export const QuizDetailPage: React.FC = () => {
 
@@ -18,16 +22,17 @@ export const QuizDetailPage: React.FC = () => {
     const [showResults, setShowResults] = useState(false)
 
     const [userAnswers, setUserAnswers] = useState({});
+    const dispatch = useAppDispatch();
+
+    const { status } = useAppSelector((state) => state.quizState);
 
     const handleStartClickBtn = () => {
-        setShowStartInfo(false);
         setQuestionId(quiz.questionIds[0])
-        setShowQuestions(true);
+        dispatch(updateStatus(QuizStatus.IN_PROGRESS))
     }
 
     const handleFinishClickBtn = () => {
-        setShowQuestions(false);
-        setShowResults(true);
+        dispatch(updateStatus(QuizStatus.FINISHED))
     }
 
     const submitAnswer = (answer) => {
@@ -42,7 +47,7 @@ export const QuizDetailPage: React.FC = () => {
         return <div>Error: {error}</div>
     }
 
-    if (showStartInfo) {
+    if (status === QuizStatus.NOT_STARTED) {
         return (
             <QuizDetails quiz={quiz} handleStartClickBtn={handleStartClickBtn}/>
         )
@@ -52,15 +57,17 @@ export const QuizDetailPage: React.FC = () => {
         return <>No such question!</>
     }
 
-    if (showQuestions && questionId) {
+    if (status === QuizStatus.IN_PROGRESS && questionId) {
+
         return <div>
+            <Timer/>
             <Question id={questionId} submitAnswer={submitAnswer}/>
             <QuestionPagination quiz={quiz} setQuestionId={setQuestionId}/>
             <button onClick={handleFinishClickBtn}>Finish attempt</button>
         </div>
     }
 
-    if (showResults) {
+    if (status === QuizStatus.FINISHED) {
         return <div>
             <h2>Results</h2>
             {Object.values(userAnswers).map((answer, idx)=>

@@ -1,4 +1,4 @@
-import {Question} from "~/models/question";
+import {Question} from "~/types/models/question";
 
 export interface Quiz {
     "id": number,
