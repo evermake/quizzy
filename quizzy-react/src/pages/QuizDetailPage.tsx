@@ -18,21 +18,10 @@ export const QuizDetailPage: React.FC = () => {
 
     const {data: quiz, error, isLoading} = useGetQuizByIdQuery(slug, questionId)
 
-    const [showStartInfo, setShowStartInfo] = useState(true)
-    const [showQuestions, setShowQuestions] = useState(false)
-    const [showResults, setShowResults] = useState(false)
-
     const [userAnswers, setUserAnswers] = useState({});
     const dispatch = useAppDispatch();
 
-    const { status, time } = useAppSelector((state) => state.quizState);
-
-    useEffect(() => {
-        if (time < 0) {
-            dispatch(updateStatus(QuizStatus.FINISHED))
-        }
-    }, [time]);
-
+    const { status } = useAppSelector((state) => state.quizState);
 
     const handleStartClickBtn = () => {
         setQuestionId(quiz.questionIds[0])
