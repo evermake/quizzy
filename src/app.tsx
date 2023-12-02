@@ -12,7 +12,7 @@ import ErrorPage from '@/pages/ErrorPage'
 import QuizDetail from '@/pages/QuizDetail'
 import reducer from '@/__data__/reducers'
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   [
     {
       path: '/',
