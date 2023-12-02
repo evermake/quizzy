@@ -6,6 +6,9 @@
     "moduleDetection": "force",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
     "types": ["@types/node"],
     "allowImportingTsExtensions": true,
     "allowJs": true,

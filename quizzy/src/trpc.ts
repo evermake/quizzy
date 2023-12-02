@@ -1,17 +1,17 @@
-import { initTRPC } from '@trpc/server'
+import type { Meta } from './meta'
 import type { Context } from './context'
-
-export interface Meta {
-  protection: 'none' | 'user' | 'admin'
-}
+import { initTRPC } from '@trpc/server'
 
 const t = initTRPC
-  .context<Context>()
   .meta<Meta>()
-  .create({
-    defaultMeta: { protection: 'none' },
-  })
+  .context<Context>()
+  .create()
 
-export const middleware = t.middleware
 export const router = t.router
+export const middleware = t.middleware
+
 export const publicProcedure = t.procedure
+  .meta({ isProtected: false })
+
+export const protectedProcedure = t.procedure
+  .meta({ isProtected: true })
