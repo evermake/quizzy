@@ -10,9 +10,9 @@ datasource db {
 model User {
   id           String    @id @default(uuid())
   createdAt    DateTime  @default(now())
+  username     String    @unique
   passwordSalt Bytes
   passwordHash Bytes
-  name         String
   attempts     Attempt[]
 }
 
@@ -21,8 +21,14 @@ model Quiz {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Unique human-readable identifier of the quiz.
+  slug String @unique
+
   // Title for the quiz.
   title String
+
+  // Description of the quiz in Markdown.
+  description String
 
   // Current status of the quiz.
   status QuizStatus
@@ -36,16 +42,13 @@ model Quiz {
   // Duration of a single attempt in seconds.
   attemptDuration Int
 
-  // Description of the quiz in Markdown.
-  description String
-
   attempts  Attempt[]
   questions Question[]
 }
 
 enum QuizStatus {
   DRAFT
-  READY
+  PUBLISHED
 }
 
 model Attempt {

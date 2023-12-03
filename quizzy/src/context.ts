@@ -1,27 +1,55 @@
 import type { CreateExpressContextOptions } from '@trpc/server/adapters/express'
+import type { PrismaClient } from '@prisma/client'
 import type { User } from './schemas'
-import { PrismaClient } from '@prisma/client'
+import { type Config, config } from './config'
+import prisma from './prisma'
+import { verifyJwt } from './utils/crypto'
 
 export interface Context {
   db: PrismaClient
-  user: User
+  config: Config
+  user: User | null
 }
 
-let prismaGlobal: PrismaClient | null = null
-
-export async function createContext(_: CreateExpressContextOptions): Context {
-  if (!prismaGlobal) {
-    prismaGlobal = new PrismaClient()
+export async function createContext({
+  req,
+}: CreateExpressContextOptions): Promise<Context> {
+  let userId: string | null = null
+  let user: User | null = null
+  const auth = req.header('Authorization')
+  if (auth) {
+    const match = auth.match(/^Bearer\s+(\S+)\s*$/i)
+    if (match) {
+      const token = match[1]
+      try {
+        const payload = await verifyJwt({
+          token,
+          secret: config.jwtSecret,
+          maxAgeSeconds: config.jwtAgeSeconds,
+        })
+        userId = payload.sub || null
+      } catch (_) {}
+    }
+  }
+  if (userId) {
+    try {
+      const userDb = await prisma.user.findUniqueOrThrow({
+        where: { id: userId },
+        select: {
+          id: true,
+          username: true,
+        },
+      })
+      user = {
+        id: userDb.id,
+        username: userDb.username,
+      }
+    } catch (_) {}
   }
 
-  // @todo [#4] We need to add user to the context, if there is a valid JWT
-  // in the request. We also need to create different contexts for different
-  // procedures: public procedures MAY NOT have a user, while protected ones
-  // MUST have.
-  const user = { username: 'alice' }
-
   return {
+    db: prisma,
+    config,
     user,
-    db: prismaGlobal,
   }
 }

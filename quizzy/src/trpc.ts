@@ -1,6 +1,6 @@
 import type { Meta } from './meta'
 import type { Context } from './context'
-import { initTRPC } from '@trpc/server'
+import { TRPCError, initTRPC } from '@trpc/server'
 
 const t = initTRPC
   .meta<Meta>()
@@ -15,3 +15,20 @@ export const publicProcedure = t.procedure
 
 export const protectedProcedure = t.procedure
   .meta({ isProtected: true })
+  .use((opts) => {
+    const { ctx } = opts
+
+    if (!ctx.user) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'not authorized',
+      })
+    }
+
+    return opts.next({
+      ctx: {
+        ...ctx,
+        user: ctx.user,
+      },
+    })
+  })

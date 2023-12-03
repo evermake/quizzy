@@ -1,22 +1,23 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "target": "esnext",
+    "incremental": false,
+    "composite": false,
+    "target": "ESNext",
     "lib": ["ESNext"],
-    "moduleDetection": "force",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "paths": {
-      "~/*": ["./src/*"]
-    },
+    "rootDir": "src",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "types": ["@types/node"],
-    "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
+    "declaration": true,
     "downlevelIteration": true,
-    "noEmit": true,
+    "emitDeclarationOnly": false,
+    "noEmit": false,
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*.ts"]
 }

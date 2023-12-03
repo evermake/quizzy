@@ -37,5 +37,9 @@
     "json",
     "jsonc",
     "yaml"
-  ]
+  ],
+
+  "[prisma]": {
+    "editor.formatOnSave": true
+  }
 }
