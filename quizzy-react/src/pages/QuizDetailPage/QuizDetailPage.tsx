@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useGetQuizByIdQuery} from "~/services/quizService";
-import Question from "~/components/Question";
-import QuizDetails from "~/components/QuizDetails";
-import QuestionPagination from "~/components/QuestionPagination";
-import Timer from "~/components/Timer";
+import Question from "./components/Question";
+import QuizDetails from "./components/QuizDetails";
+import QuestionPagination from "./components/QuestionPagination";
+import Timer from "./components/Timer";
 import {useAppDispatch, useAppSelector} from "~/store";
 import {updatePaginationId, updateQuestionId, updateStatus, updateTime} from "~/store/reducer/quizSlice";
 import {QuizStatus} from "~/types/state/quiz";
-import Review from "~/components/Review";
-import Results from "~/components/Results";
+import Review from "./components/Review";
+import Results from "./components/Results";
 
 export const QuizDetailPage: React.FC = () => {
 
@@ -24,7 +24,6 @@ export const QuizDetailPage: React.FC = () => {
 
     const handleStartClickBtn = () => {
         dispatch(updateQuestionId(quiz.questionIds[0]))
-        dispatch(updatePaginationId(0))
         dispatch(updateTime(quiz.duration || 600))
         dispatch(updateStatus(QuizStatus.IN_PROGRESS))
     }

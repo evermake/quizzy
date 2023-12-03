@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { api } from '~/api/client'
-import QuizList from "~/components/QuizList";
+import QuizList from "./components/QuizList";
 
 export const QuizListPage: React.FC = () => {
   useEffect(() => {

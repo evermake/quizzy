@@ -1,10 +1,10 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Layout } from '~/pages/Layout'
+import { Layout } from '~/pages/Layout/Layout'
 import { LoginPage } from '~/pages/LoginPage'
 import { ErrorPage } from '~/pages/ErrorPage'
-import { QuizDetailPage } from '~/pages/QuizDetailPage'
-import { QuizListPage } from '~/pages/QuizListPage'
+import { QuizDetailPage } from '~/pages/QuizDetailPage/QuizDetailPage'
+import { QuizListPage } from '~/pages/QuizListPage/QuizListPage'
 import {store} from "~/store";
 import {Provider} from "react-redux";
 import {AppRoute} from "~/constants";

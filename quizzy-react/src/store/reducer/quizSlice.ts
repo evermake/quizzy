@@ -3,7 +3,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: QuizState = {
     status: QuizStatus.NOT_STARTED,
-    userAnswers: []
+    userAnswers: [],
+    paginationId: 0
 };
 
 const quizSlice = createSlice({
