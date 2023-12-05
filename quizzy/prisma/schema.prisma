@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  username     String    @unique
+  passwordSalt Bytes
+  passwordHash Bytes
+  attempts     Attempt[]
+}
+
+model Quiz {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Unique human-readable identifier of the quiz.
+  slug String @unique
+
+  // Title for the quiz.
+  title String
+
+  // Description of the quiz in Markdown.
+  description String
+
+  // Current status of the quiz.
+  status QuizStatus
+
+  // Time when quiz will be opened.
+  opensAt DateTime
+
+  // Time when quiz will be closed.
+  closesAt DateTime?
+
+  // Duration of a single attempt in seconds.
+  attemptDuration Int
+
+  attempts  Attempt[]
+  questions Question[]
+}
+
+enum QuizStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Attempt {
+  id String @id @default(uuid())
+
+  // Time when attempt was started.
+  startedAt DateTime
+
+  // Time when attempt was finished. Empty if was not finished explicitly yet.
+  finishedAt DateTime?
+
+  // User who attempted the quiz.
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // Quiz the attempt is for.
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId String
+
+  answers Answer[]
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Quiz the question belongs to.
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId String
+
+  // Content of the question in Markdown.
+  content String
+
+  // JSON of the question config.
+  config Json
+
+  // Order of the question in the quiz.
+  order Int
+
+  answers Answer[]
+
+  @@unique([quizId, order])
+}
+
+model Answer {
+  // Attempt the answer belongs to.
+  attempt   Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  attemptId String
+
+  // Question the answer is for.
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+
+  // Time this answer was submitted last time.
+  lastSavedAt DateTime
+
+  // JSON of the answer.
+  data Json
+
+  @@id([attemptId, questionId])
+}

@@ -4,10 +4,10 @@ import QuizList from "./components/QuizList";
 
 export const QuizListPage: React.FC = () => {
   useEffect(() => {
-    api.ping.query().then(() => {
+    api.login.mutate({ username: 'admin', password: 'admin' })
       // eslint-disable-next-line no-console
-      console.log('ping')
-    })
+      .then(quizzes => console.log(quizzes))
+      .catch(error => console.error(error))
   }, [])
 
   return (
