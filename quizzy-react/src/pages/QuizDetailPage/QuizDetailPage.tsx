@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useParams} from 'react-router-dom'
-import {useGetQuizByIdQuery} from "~/services/quizService";
+import {useGetQuizByIdQuery} from "~/store/services/quizService";
 import Question from "./components/Question";
 import QuizDetails from "./components/QuizDetails";
 import QuestionPagination from "./components/QuestionPagination";

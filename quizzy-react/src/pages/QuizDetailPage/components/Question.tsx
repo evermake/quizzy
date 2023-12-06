@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useGetQuestionByIdQuery} from "~/services/questionService";
+import {useGetQuestionByIdQuery} from "~/store/services/questionService";
 import {useAppDispatch, useAppSelector} from "~/store";
 import {updateUserAnswer} from "~/store/reducer/quizSlice";
 

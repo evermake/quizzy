@@ -1,5 +1,5 @@
 import React from 'react';
-import {useGetUserQuery} from "~/services/userService";
+import {useGetUserQuery} from "~/store/services/userService";
 import {Link} from "react-router-dom";
 import {AppRoute} from "~/constants";
 

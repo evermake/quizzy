@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {setupListeners} from '@reduxjs/toolkit/query/react'
-import {userService} from "~/services/userService";
-import {quizService} from "~/services/quizService";
-import {questionService} from "~/services/questionService";
+import {userService} from "~/store/services/userService";
+import {quizService} from "~/store/services/quizService";
+import {questionService} from "~/store/services/questionService";
 import quizSlice from "~/store/reducer/quizSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 

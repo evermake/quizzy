@@ -1,5 +1,5 @@
 import React from 'react';
-import {useGetQuizzesQuery} from "~/services/quizService";
+import {useGetQuizzesQuery} from "~/store/services/quizService";
 import {Link} from "react-router-dom";
 import {AppRoute} from "~/constants";
 
