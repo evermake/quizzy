@@ -7,6 +7,7 @@ module.exports = antfu(
       'curly': ['error', 'all'],
       'style/brace-style': ['error', '1tbs'],
       'ts/consistent-type-definitions': ['error', 'type'],
+      'style/jsx-one-expression-per-line': ['off'],
     },
   },
 )

@@ -1,7 +1,7 @@
-export interface Question {
-    id: number,
-    content: string,
-    type: string,
-    answers: string[],
-    correctAnswer: string,
+export type Question = {
+  id: number
+  content: string
+  type: string
+  answers: string[]
+  correctAnswer: string
 }
