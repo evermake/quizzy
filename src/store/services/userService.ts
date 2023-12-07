@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BASE_URL } from '@/constants'
+import { getConfigValue } from '@ijl/cli'
 import type { User } from '@/types/models/user'
 
 export const userService = createApi({
   reducerPath: 'userService',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: getConfigValue('quizzy.api.base.url'),
+  }),
   endpoints: build => ({
     getUser: build.query<User, void>({
       query: () => '/user',

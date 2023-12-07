@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BASE_URL } from '@/constants'
+import { getConfigValue } from '@ijl/cli'
 import type { Quiz } from '@/types/models/quiz'
 
 export const quizService = createApi({
   reducerPath: 'quizService',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: getConfigValue('quizzy.api.base.url'),
+  }),
   endpoints: build => ({
     getQuizzes: build.query<Quiz[], void>({
       query: () => '/quizzes',
