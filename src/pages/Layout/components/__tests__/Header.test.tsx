@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import React from 'react'
-import Header from '.'
+import Header from '../Header'
 import { render } from '@/test-utils'
 
 jest.mock('react-router-dom', () => ({

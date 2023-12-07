@@ -25,7 +25,8 @@
     "types": [
       "webpack-env",
       "node",
-      "jest"
+      "jest",
+      "@testing-library/jest-dom"
     ],
     "noImplicitAny": false,
     "outDir": "./dist/",

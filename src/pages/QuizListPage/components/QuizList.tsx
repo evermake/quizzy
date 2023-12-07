@@ -14,7 +14,7 @@ function QuizList() {
     return (
       <div>
         error:
-        {error}
+        {/*{error}*/}
       </div>
     )
   }
