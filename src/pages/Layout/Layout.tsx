@@ -9,7 +9,7 @@ export const Layout: React.FC = () => {
       <main>
         <Outlet />
       </main>
-      <footer>footer</footer>
+      {/*<footer>footer</footer>*/}
     </div>
   )
 }
