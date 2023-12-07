@@ -12,7 +12,7 @@ function Review({ questionIds }) {
   const keys = Object.keys(userAnswers)
 
   const answers = emptyArr.map((answer, id) => {
-    if (keys.includes(String(id))) {
+    if (keys.includes(String(id)) && userAnswers[id]) {
       return userAnswers[id]
     }
     return emptyArr[id]

@@ -16,6 +16,9 @@ const quizSlice = createSlice({
     updateStatus: (state, action: PayloadAction<QuizStatus>) => {
       state.status = action.payload
     },
+    updateQuizId: (state, action: PayloadAction<QuizStatus>) => {
+      state.quizId = action.payload
+    },
     updateTime: (state, action: PayloadAction<number>) => {
       state.time = action.payload
     },
@@ -37,6 +40,7 @@ export const {
   updateQuestionId,
   updatePaginationId,
   updateUserAnswer,
+  updateQuizId,
 } = quizSlice.actions
 
 export default quizSlice.reducer

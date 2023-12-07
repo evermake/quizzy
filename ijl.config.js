@@ -26,6 +26,6 @@ module.exports = {
     },
   },
   config: {
-    'quizzy.api.base.url': 'https://defiant-tuna-turtleneck.cyclic.app/api',
+    'quizzy.api.base.url': 'http://localhost:5000/api',
   },
 }

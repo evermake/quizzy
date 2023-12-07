@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { useGetQuestionByIdQuery } from '@/store/services/questionService'
 import { updateUserAnswer } from '@/store/reducer/quizSlice'
 
 function Question() {
-  const { questionId } = useAppSelector(state => state.quizState)
+  const { questionId, userAnswers, paginationId } = useAppSelector(state => state.quizState)
 
   const { data: question, error, isLoading } = useGetQuestionByIdQuery(questionId)
   const dispatch = useAppDispatch()
 
   const [userAnswer, setAnswer] = useState<string>('')
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    if (!searchParams.get(question) || searchParams.get(question) !== paginationId + 1) {
+      setSearchParams({ question: paginationId + 1 })
+    }
+  }, [])
 
   if (isLoading) {
     return <>Loading...</>
@@ -22,10 +30,6 @@ function Question() {
         {error}
       </>
     )
-  }
-
-  if (!question) {
-    return <>No data for question!</>
   }
 
   if (question.type === 'option') {
@@ -48,7 +52,7 @@ function Question() {
         </ul>
         <div>
           Current answer:
-          {userAnswer}
+          {userAnswers[paginationId] ?? userAnswer}
         </div>
       </>
     )
@@ -60,10 +64,11 @@ function Question() {
         <div>{question.content}</div>
         <div>
           Current answer:
-          {' '}
-          <input onChange={(event) => {
-            dispatch(updateUserAnswer(event.target.value))
-          }}
+          <input
+            onChange={(event) => {
+              dispatch(updateUserAnswer(event.target.value))
+            }}
+            value={userAnswers[paginationId] ?? ''}
           >
           </input>
         </div>

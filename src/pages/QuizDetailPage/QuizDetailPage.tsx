@@ -8,7 +8,7 @@ import Review from './components/Review'
 import Results from './components/Results'
 import { useGetQuizByIdQuery } from '@/store/services/quizService'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { updateQuestionId, updateStatus, updateTime } from '@/store/reducer/quizSlice'
+import { updateQuestionId, updateQuizId, updateStatus, updateTime } from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
 
 export const QuizDetailPage: React.FC = () => {
@@ -16,13 +16,13 @@ export const QuizDetailPage: React.FC = () => {
 
   const { data: quiz, error, isLoading } = useGetQuizByIdQuery(slug)
 
-  // const [userAnswers, setUserAnswers] = useState({})
   const dispatch = useAppDispatch()
 
-  const { status, questionId } = useAppSelector(state => state.quizState)
+  const { status, questionId, quizId } = useAppSelector(state => state.quizState)
 
   const handleStartClickBtn = () => {
     dispatch(updateQuestionId(quiz.questionIds[0]))
+    dispatch(updateQuizId(quiz.id))
     dispatch(updateTime(quiz.duration || 600))
     dispatch(updateStatus(QuizStatus.IN_PROGRESS))
   }
@@ -41,6 +41,12 @@ export const QuizDetailPage: React.FC = () => {
         Error:
         {error}
       </div>
+    )
+  }
+
+  if (quizId && quiz.id !== quizId) {
+    return (
+      <h2>You have another active quiz now</h2>
     )
   }
 
@@ -64,6 +70,7 @@ export const QuizDetailPage: React.FC = () => {
   if (status === QuizStatus.REVIEW) {
     return (
       <>
+        <Timer />
         <Review questionIds={quiz.questionIds} />
       </>
     )
