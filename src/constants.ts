@@ -1,10 +1,10 @@
+import { getNavigationsValue } from "@ijl/cli";
+
 export const AppRoute = {
-  BASENAME: '/',
-  HOME: '/',
-  LOGIN: '/login',
+  HOME: getNavigationsValue('quizzy.home'),
+  LOGIN: getNavigationsValue('quizzy.login'),
   LOGOUT: '/logout',
-  QUIZZES: '/quizzes',
+  QUIZZES: getNavigationsValue('quizzy.quizzes'),
   SLUG: '/:slug',
   ID: '/:id',
 }
-export const BASE_URL = 'https://defiant-tuna-turtleneck.cyclic.app/api'
