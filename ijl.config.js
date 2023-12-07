@@ -18,7 +18,7 @@ module.exports = {
     'quizzy.main': '/quizzy',
     'quizzy.home': '/',
     'quizzy.login': '/login',
-    'quizzy.quizzes': '/quizzes'
+    'quizzy.quizzes': '/quizzes',
   },
   features: {
     quizzy: {

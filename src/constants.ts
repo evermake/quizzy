@@ -1,4 +1,4 @@
-import { getNavigationsValue } from "@ijl/cli";
+import { getNavigationsValue } from '@ijl/cli'
 
 export const AppRoute = {
   HOME: getNavigationsValue('quizzy.home'),
