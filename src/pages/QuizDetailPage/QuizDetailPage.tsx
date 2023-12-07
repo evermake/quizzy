@@ -52,17 +52,16 @@ export const QuizDetailPage: React.FC = () => {
 
   if (status === QuizStatus.NOT_STARTED) {
     return (
-      <QuizDetails quiz={quiz} handleStartClickBtn={handleStartClickBtn}/>
+      <QuizDetails quiz={quiz} handleStartClickBtn={handleStartClickBtn} />
     )
   }
 
   if (status === QuizStatus.IN_PROGRESS && questionId) {
-
     return (
       <div>
-        <Timer/>
-        <Question/>
-        <QuestionPagination quiz={quiz}/>
+        <Timer />
+        <Question />
+        <QuestionPagination quiz={quiz} />
         <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
       </div>
     )
@@ -71,13 +70,13 @@ export const QuizDetailPage: React.FC = () => {
   if (status === QuizStatus.REVIEW) {
     return (
       <>
-        <Timer/>
-        <Review questionIds={quiz.questionIds}/>
+        <Timer />
+        <Review questionIds={quiz.questionIds} />
       </>
     )
   }
 
   if (status === QuizStatus.FINISHED) {
-    return <Results/>
+    return <Results />
   }
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { updateStatus } from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
-import Timer from "./Timer";
 
 function Review({ questionIds }) {
   const { userAnswers } = useAppSelector(state => state.quizState)

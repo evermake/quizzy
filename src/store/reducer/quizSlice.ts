@@ -40,7 +40,7 @@ export const {
   updateQuestionId,
   updatePaginationId,
   updateUserAnswer,
-  updateQuizId
+  updateQuizId,
 } = quizSlice.actions
 
 export default quizSlice.reducer

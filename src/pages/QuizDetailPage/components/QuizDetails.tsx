@@ -1,8 +1,7 @@
 import React from 'react'
-import { Quiz } from "@/types/models/quiz";
+import type { Quiz } from '@/types/models/quiz'
 
 function QuizDetails({ quiz, handleStartClickBtn }: { quiz: Quiz }) {
-
   return (
     <div>
       <div>
@@ -21,8 +20,8 @@ function QuizDetails({ quiz, handleStartClickBtn }: { quiz: Quiz }) {
         {quiz.closesAt}
       </div>
       {
-        quiz.questionIds.length === 0 &&
-          <h2>no questions in quiz</h2>
+        quiz.questionIds.length === 0
+        && <h2>no questions in quiz</h2>
       }
       <button onClick={handleStartClickBtn} disabled={quiz.questionIds.length === 0}>
         Start Quiz
