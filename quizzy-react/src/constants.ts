@@ -7,3 +7,4 @@ export const AppRoute = {
     SLUG: '/:slug',
     ID: '/:id'
 }
+export const BASE_URL = 'https://defiant-tuna-turtleneck.cyclic.app/api'
