@@ -10,7 +10,7 @@ import { QuizListPage } from '@/pages/QuizListPage/QuizListPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { QuizDetailPage } from '@/pages/QuizDetailPage/QuizDetailPage'
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   [
     {
       path: AppRoute.HOME,
