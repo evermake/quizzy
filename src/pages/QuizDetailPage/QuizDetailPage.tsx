@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import Question from './components/Question'
+import QuestionInfo from './components/QuestionInfo'
 import QuizDetails from './components/QuizDetails'
 import QuestionPagination from './components/QuestionPagination'
 import Timer from './components/Timer'
@@ -8,7 +8,7 @@ import Review from './components/Review'
 import Results from './components/Results'
 import { useGetQuizByIdQuery } from '@/store/services/quizService'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { updateQuestionId, updateQuizId, updateStatus, updateTime } from '@/store/reducer/quizSlice'
+import { startQuiz, updateStatus } from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
 
 export const QuizDetailPage: React.FC = () => {
@@ -21,15 +21,12 @@ export const QuizDetailPage: React.FC = () => {
   const { status, questionId, quizId } = useAppSelector(state => state.quizState)
 
   const handleStartClickBtn = () => {
-    dispatch(updateQuestionId(quiz.questionIds[0]))
-    dispatch(updateQuizId(quiz.id))
-    dispatch(updateTime(quiz.duration || 600))
-    dispatch(updateStatus(QuizStatus.IN_PROGRESS))
+    dispatch(startQuiz({
+      quizId: quiz.id,
+      duration: quiz.duration,
+      questionIds: quiz.questionIds,
+    }))
   }
-
-  // const submitAnswer = (answer) => {
-  //   setUserAnswers({...userAnswers, questionId: answer})
-  // }
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -60,7 +57,7 @@ export const QuizDetailPage: React.FC = () => {
     return (
       <div>
         <Timer />
-        <Question />
+        <QuestionInfo />
         <QuestionPagination quiz={quiz} />
         <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
       </div>
@@ -77,6 +74,6 @@ export const QuizDetailPage: React.FC = () => {
   }
 
   if (status === QuizStatus.FINISHED) {
-    return <Results />
+    return <Results questionIds={quiz.questionIds} />
   }
 }

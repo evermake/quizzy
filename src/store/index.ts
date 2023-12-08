@@ -2,21 +2,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 import type { TypedUseSelectorHook } from 'react-redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { userService } from '@/store/services/userService'
 import { quizService } from '@/store/services/quizService'
 import { questionService } from '@/store/services/questionService'
 import quizSlice from '@/store/reducer/quizSlice'
 
 export const store = configureStore({
   reducer: {
-    [userService.reducerPath]: userService.reducer,
     [quizService.reducerPath]: quizService.reducer,
     [questionService.reducerPath]: questionService.reducer,
     quizState: quizSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
-      userService.middleware,
       quizService.middleware,
       questionService.middleware,
     ),

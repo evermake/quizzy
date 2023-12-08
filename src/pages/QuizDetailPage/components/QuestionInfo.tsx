@@ -3,11 +3,12 @@ import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { useGetQuestionByIdQuery } from '@/store/services/questionService'
 import { updateUserAnswer } from '@/store/reducer/quizSlice'
+import type { Question } from '@/types/models/question'
 
-function Question() {
+function QuestionInfo() {
   const { questionId, userAnswers, paginationId } = useAppSelector(state => state.quizState)
 
-  const { data: question, error, isLoading } = useGetQuestionByIdQuery(questionId)
+  const { data: question, error, isLoading } = useGetQuestionByIdQuery<Question>(questionId)
   const dispatch = useAppDispatch()
 
   const [userAnswer, setAnswer] = useState<string>('')
@@ -42,7 +43,7 @@ function Question() {
               key={answer}
               onClick={() => {
                 setAnswer(answer)
-                dispatch(updateUserAnswer(answer))
+                dispatch(updateUserAnswer({ answer, isCorrect: answer === question.correctAnswer }))
               }}
             >
               {answer}
@@ -52,7 +53,7 @@ function Question() {
         </ul>
         <div>
           Current answer:
-          {userAnswers[paginationId] ?? userAnswer}
+          {userAnswers[paginationId]?.answer ?? userAnswer}
         </div>
       </>
     )
@@ -66,9 +67,13 @@ function Question() {
           Current answer:
           <input
             onChange={(event) => {
-              dispatch(updateUserAnswer(event.target.value))
+              const answer = event.target.value
+              dispatch(updateUserAnswer({
+                answer,
+                isCorrect: answer.toLowerCase().trim() === question.correctAnswer.toLowerCase().trim(),
+              }))
             }}
-            value={userAnswers[paginationId] ?? ''}
+            value={userAnswers[paginationId]?.answer ?? ''}
           >
           </input>
         </div>
@@ -77,4 +82,4 @@ function Question() {
   }
 }
 
-export default Question
+export default QuestionInfo
