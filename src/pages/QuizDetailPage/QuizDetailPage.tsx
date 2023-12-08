@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import Question from './components/Question'
+import QuestionInfo from './components/QuestionInfo'
 import QuizDetails from './components/QuizDetails'
 import QuestionPagination from './components/QuestionPagination'
 import Timer from './components/Timer'
@@ -26,10 +26,6 @@ export const QuizDetailPage: React.FC = () => {
     dispatch(updateTime(quiz.duration || 600))
     dispatch(updateStatus(QuizStatus.IN_PROGRESS))
   }
-
-  // const submitAnswer = (answer) => {
-  //   setUserAnswers({...userAnswers, questionId: answer})
-  // }
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -60,7 +56,7 @@ export const QuizDetailPage: React.FC = () => {
     return (
       <div>
         <Timer />
-        <Question />
+        <QuestionInfo />
         <QuestionPagination quiz={quiz} />
         <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
       </div>
@@ -77,6 +73,6 @@ export const QuizDetailPage: React.FC = () => {
   }
 
   if (status === QuizStatus.FINISHED) {
-    return <Results />
+    return <Results questionIds={quiz.questionIds} />
   }
 }

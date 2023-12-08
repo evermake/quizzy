@@ -28,7 +28,7 @@ const quizSlice = createSlice({
     updatePaginationId: (state, action: PayloadAction<number>) => {
       state.paginationId = action.payload
     },
-    updateUserAnswer: (state, action: PayloadAction<number>) => {
+    updateUserAnswer: (state, action: PayloadAction<{ answer, isCorrect }>) => {
       state.userAnswers[state.paginationId] = action.payload
     },
   },
