@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@/store'
-import { updateStatus, updateTime } from '@/store/reducer/quizSlice'
-import { QuizStatus } from '@/types/state/quiz'
 
-function Timer() {
-  const dispatch = useAppDispatch()
-  const { time } = useAppSelector(state => state.quizState)
-
+function Timer({ time, updateTimer, finishQuiz }: { time: number, updateTimer: () => void, finishQuiz: () => void }) {
   useEffect(() => {
     if (time < 0) {
-      dispatch(updateStatus(QuizStatus.FINISHED))
+      finishQuiz()
     }
     const timeInterval = setInterval(() => {
-      dispatch(updateTime(time - 1))
+      updateTimer()
     }, 1000)
 
     return () => {
@@ -25,11 +19,7 @@ function Timer() {
 
   return (
     <div>
-      {minutes}
-      {' '}
-      :
-      {' '}
-      {seconds}
+      {minutes}:{seconds}
     </div>
   )
 }

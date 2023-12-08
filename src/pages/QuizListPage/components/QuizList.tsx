@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useGetQuizzesQuery } from '@/store/services/quizService'
 import { AppRoute } from '@/constants'
+import type { Quiz } from '@/types/models/quiz'
 
-function QuizList() {
-  const { data: quizList, error, isLoading } = useGetQuizzesQuery()
-
+function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: string, isLoading: boolean }) {
   if (isLoading) {
     return <div>Loading...</div>
   }

@@ -1,23 +1,13 @@
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { useAppDispatch } from '@/store'
-import { updatePaginationId, updateQuestionId } from '@/store/reducer/quizSlice'
 
-function QuestionPagination({ quiz }) {
-  const dispatch = useAppDispatch()
-  const [_, setSearchParams] = useSearchParams()
-
+function QuestionPagination({ questionIds, handlePaginateBtn }) {
   return (
     <div>
-      {quiz.questionIds.map((questionId, id) => {
+      {questionIds.map((questionId, id) => {
         return (
           <button
             key={questionId}
-            onClick={() => {
-              dispatch(updatePaginationId(id))
-              dispatch(updateQuestionId(questionId))
-              setSearchParams({ question: id + 1 })
-            }}
+            onClick={() => handlePaginateBtn(questionId, id)}
           >
             {id + 1}
           </button>
