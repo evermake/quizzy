@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { AppRoute } from '@/constants'
-import type { Quiz } from '@/types/models/quiz'
+import {Link} from 'react-router-dom'
+import {useGetQuizzesQuery} from '@/store/services/quizService'
+import {AppRoute} from '@/constants'
+import {StaticRouter} from "react-router-dom/server";
 
 function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: string, isLoading: boolean }) {
   if (isLoading) {
@@ -17,18 +18,20 @@ function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: str
     )
   }
 
-  return (
-    <div>
-      {quizList.map(quiz => (
-        <Link key={quiz.id} to={`${AppRoute.QUIZZES}/${quiz.id}`}>
-          <div>
-            {quiz.title}
-          </div>
-        </Link>
-      ),
-      )}
-    </div>
-  )
+    return (
+        <div>
+            {quizList.map(quiz => (
+                    <StaticRouter location={""}>
+                        <Link key={quiz.id} to={`${AppRoute.QUIZZES}/${quiz.id}`}>
+                            <div>
+                                {quiz.title}
+                            </div>
+                        </Link>
+                    </StaticRouter>
+                ),
+            )}
+        </div>
+    )
 }
 
 export default QuizList

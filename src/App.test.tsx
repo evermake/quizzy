@@ -7,12 +7,10 @@ import { render, screen } from '@/test-utils'
 
 jest.mock('@ijl/cli', () => ({
   getNavigationsValue: (val: string) => ({
-    'quizzy.home': '/',
-    'quizzy.login': '/login',
-    'quizzy.quizzes': '/quizzes',
+    'quizzy.main': '/',
   }[val]),
   getConfigValue: (val: string) => ({
-    'quizzy.api.base.url': 'https://defiant-tuna-turtleneck.cyclic.app/api',
+    'quizzy.api.base.url': '/api',
   }[val]),
 }))
 
