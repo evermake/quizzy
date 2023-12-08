@@ -8,7 +8,7 @@ import Review from './components/Review'
 import Results from './components/Results'
 import { useGetQuizByIdQuery } from '@/store/services/quizService'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { updateQuestionId, updateQuizId, updateStatus, updateTime } from '@/store/reducer/quizSlice'
+import { startQuiz, updateStatus } from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
 
 export const QuizDetailPage: React.FC = () => {
@@ -21,10 +21,11 @@ export const QuizDetailPage: React.FC = () => {
   const { status, questionId, quizId } = useAppSelector(state => state.quizState)
 
   const handleStartClickBtn = () => {
-    dispatch(updateQuestionId(quiz.questionIds[0]))
-    dispatch(updateQuizId(quiz.id))
-    dispatch(updateTime(quiz.duration || 600))
-    dispatch(updateStatus(QuizStatus.IN_PROGRESS))
+    dispatch(startQuiz({
+      quizId: quiz.id,
+      duration: quiz.duration,
+      questionIds: quiz.questionIds,
+    }))
   }
 
   if (isLoading) {

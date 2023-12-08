@@ -1,8 +1,10 @@
 import React from 'react'
-import { useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { resetQuiz } from '@/store/reducer/quizSlice'
 
 function Results({ questionIds }) {
   const { userAnswers } = useAppSelector(state => state.quizState)
+  const dispatch = useAppDispatch()
 
   const emptyArr = Array.from({ length: questionIds.length }, () => 'No answer')
   const keys = Object.keys(userAnswers)
@@ -28,6 +30,7 @@ function Results({ questionIds }) {
 
       {Math.floor((posCounter / questionIds.length) * 100)}% of correct answers
 
+      <button onClick={() => dispatch(resetQuiz())}>try another</button>
     </div>
   )
 }

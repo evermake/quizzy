@@ -31,6 +31,19 @@ const quizSlice = createSlice({
     updateUserAnswer: (state, action: PayloadAction<{ answer, isCorrect }>) => {
       state.userAnswers[state.paginationId] = action.payload
     },
+    startQuiz: (state, action: PayloadAction<{ quizId, duration, questionIds }>) => {
+      state.status = (QuizStatus.IN_PROGRESS)
+      state.questionId = action.payload.questionIds[0]
+      state.quizId = action.payload.quizId
+      state.time = action.payload.duration || 600
+    },
+    resetQuiz: (state, _: PayloadAction<null>) => {
+      state.status = (QuizStatus.NOT_STARTED)
+      state.questionIds = null
+      state.quizId = null
+      state.userAnswers = {}
+      state.questionId = null
+    },
   },
 })
 
@@ -41,6 +54,8 @@ export const {
   updatePaginationId,
   updateUserAnswer,
   updateQuizId,
+  startQuiz,
+  resetQuiz,
 } = quizSlice.actions
 
 export default quizSlice.reducer
