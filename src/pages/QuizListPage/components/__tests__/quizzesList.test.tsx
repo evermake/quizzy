@@ -15,7 +15,7 @@ describe('QuizList Component', () => {
     // Mocking the hook's return value
     (useGetQuizzesQuery as jest.Mock).mockReturnValue({ data: undefined, error: undefined, isLoading: true });
 
-    render(<QuizList />);
+    render(<QuizList  quizList={[]} error={undefined} isLoading/>);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
