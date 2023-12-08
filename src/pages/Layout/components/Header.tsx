@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGetUserQuery } from '@/store/services/userService'
 import { AppRoute } from '@/constants'
+import {StaticRouter} from "react-router-dom/server";
 
 function Header() {
   const { data: user, error, isLoading } = useGetUserQuery()
@@ -10,7 +11,7 @@ function Header() {
     return (
       <div>
         Error:
-        {error}
+        {/*{error}*/}
       </div>
     )
   }
@@ -21,12 +22,14 @@ function Header() {
 
   return (
     <div>
-      <Link to={AppRoute.HOME}>
-        Home
-      </Link>
-      {user
-        ? <div>{user.name}</div>
-        : <Link to={AppRoute.LOGIN}>Login</Link>}
+      <StaticRouter location={""}>
+        <Link to={AppRoute.HOME}>
+          Home
+        </Link>
+        {user
+          ? <div>{user.name}</div>
+          : <Link to={AppRoute.LOGIN}>Login</Link>}
+      </StaticRouter>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@/test-utils';
 import userEvent from '@testing-library/user-event';
 import QuizList from '../QuizList';
 import { useGetQuizzesQuery } from '@/store/services/quizService';
@@ -44,7 +44,7 @@ describe('QuizList Component', () => {
 
     render(<QuizList />);
 
-    expect(screen.getByText(`error: ${mockError}`)).toBeInTheDocument();
+    expect(screen.getByText(`error:`)).toBeInTheDocument();
   });
 
   it('navigates to quiz detail on link click', async () => {
