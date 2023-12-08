@@ -1,10 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { resetQuiz } from '@/store/reducer/quizSlice'
+import { AppRoute } from '@/constants'
 
 function Results({ questionIds }) {
   const { userAnswers } = useAppSelector(state => state.quizState)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const emptyArr = Array.from({ length: questionIds.length }, () => 'No answer')
   const keys = Object.keys(userAnswers)
@@ -30,7 +33,12 @@ function Results({ questionIds }) {
 
       {Math.floor((posCounter / questionIds.length) * 100)}% of correct answers
 
-      <button onClick={() => dispatch(resetQuiz())}>try another</button>
+      <button onClick={() => {
+        dispatch(resetQuiz())
+        navigate(AppRoute.HOME)
+      }}
+      >reset quiz
+      </button>
     </div>
   )
 }

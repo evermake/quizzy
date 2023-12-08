@@ -33,6 +33,7 @@ const quizSlice = createSlice({
     },
     startQuiz: (state, action: PayloadAction<{ quizId, duration, questionIds }>) => {
       state.status = (QuizStatus.IN_PROGRESS)
+      state.paginationId = 0
       state.questionId = action.payload.questionIds[0]
       state.quizId = action.payload.quizId
       state.time = action.payload.duration || 600
@@ -43,6 +44,7 @@ const quizSlice = createSlice({
       state.quizId = null
       state.userAnswers = {}
       state.questionId = null
+      state.paginationId = null
     },
   },
 })
