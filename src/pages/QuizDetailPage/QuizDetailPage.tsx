@@ -8,7 +8,7 @@ import Review from './components/Review'
 import Results from './components/Results'
 import { useGetQuizByIdQuery } from '@/store/services/quizService'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { startQuiz, updateStatus } from '@/store/reducer/quizSlice'
+import { startQuiz, updateStatus, updateTime } from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
 
 export const QuizDetailPage: React.FC = () => {
@@ -18,7 +18,7 @@ export const QuizDetailPage: React.FC = () => {
 
   const dispatch = useAppDispatch()
 
-  const { status, questionId, quizId } = useAppSelector(state => state.quizState)
+  const { status, questionId, quizId, time } = useAppSelector(state => state.quizState)
 
   const handleStartClickBtn = () => {
     dispatch(startQuiz({
@@ -56,7 +56,14 @@ export const QuizDetailPage: React.FC = () => {
   if (status === QuizStatus.IN_PROGRESS && questionId) {
     return (
       <div>
-        <Timer />
+        <Timer
+          time={time}
+          finishQuiz={() =>
+            dispatch(updateStatus(QuizStatus.FINISHED))}
+          updateTimer={() => {
+            dispatch(updateTime(time - 1))
+          }}
+        />
         <QuestionInfo />
         <QuestionPagination quiz={quiz} />
         <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
@@ -67,7 +74,14 @@ export const QuizDetailPage: React.FC = () => {
   if (status === QuizStatus.REVIEW) {
     return (
       <>
-        <Timer />
+        <Timer
+          time={time}
+          finishQuiz={() =>
+            dispatch(updateStatus(QuizStatus.FINISHED))}
+          updateTimer={() => {
+            dispatch(updateTime(time - 1))
+          }}
+        />
         <Review questionIds={quiz.questionIds} />
       </>
     )
