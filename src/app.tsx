@@ -7,7 +7,6 @@ import { Layout } from '@/pages/Layout/Layout'
 import { ErrorPage } from '@/pages/ErrorPage'
 import { AppRoute } from '@/constants'
 import { QuizListPage } from '@/pages/QuizListPage/QuizListPage'
-import { LoginPage } from '@/pages/LoginPage'
 import { QuizDetailPage } from '@/pages/QuizDetailPage/QuizDetailPage'
 
 export const router = createBrowserRouter(
@@ -20,10 +19,6 @@ export const router = createBrowserRouter(
         {
           index: true,
           element: <QuizListPage />,
-        },
-        {
-          path: AppRoute.LOGIN,
-          element: <LoginPage />,
         },
         {
           path: AppRoute.QUIZZES + AppRoute.SLUG,
