@@ -16,6 +16,8 @@ module.exports = {
   },
   navigations: {
     'quizzy.main': '/quizzy',
+    'quizzy.home': '/',
+    'quizzy.quizzes': '/quizzes',
   },
   features: {
     quizzy: {

@@ -1,19 +1,25 @@
 import React from 'react'
-import { useAppDispatch, useAppSelector } from '@/store'
-import { updateStatus } from '@/store/reducer/quizSlice'
-import { QuizStatus } from '@/types/state/quiz'
 
-function Review({ questionIds }) {
-  const { userAnswers } = useAppSelector(state => state.quizState)
-
+function Review(
+  {
+    questionIds,
+    userAnswers,
+    handleReturnBtn,
+    handleFinishBtn,
+  }: {
+    questionIds: number[]
+    userAnswers: { answer: string, isCorrect: boolean }
+    handleReturnBtn: () => void
+    handleFinishBtn: () => void
+  },
+) {
   const emptyArr = Array.from({ length: questionIds.length }, () => 'No answer')
-  const dispatch = useAppDispatch()
 
   const keys = Object.keys(userAnswers)
 
   const answers = emptyArr.map((answer, id) => {
-    if (keys.includes(String(id))) {
-      return userAnswers[id]
+    if (keys.includes(String(id)) && userAnswers[id]) {
+      return userAnswers[id].answer
     }
     return emptyArr[id]
   })
@@ -23,8 +29,8 @@ function Review({ questionIds }) {
       <h2>Review quiz</h2>
       {answers.map((answer, id) => (<div>#{id + 1}:{answer}</div>
       ))}
-      <button onClick={() => dispatch(updateStatus(QuizStatus.IN_PROGRESS))}>Return to quiz</button>
-      <button onClick={() => dispatch(updateStatus(QuizStatus.FINISHED))}>Finish</button>
+      <button onClick={handleReturnBtn}>Return to quiz</button>
+      <button onClick={handleFinishBtn}>Finish</button>
     </div>
   )
 }

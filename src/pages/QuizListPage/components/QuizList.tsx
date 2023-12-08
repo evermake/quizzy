@@ -4,21 +4,19 @@ import {useGetQuizzesQuery} from '@/store/services/quizService'
 import {AppRoute} from '@/constants'
 import {StaticRouter} from "react-router-dom/server";
 
-function QuizList() {
-    const {data: quizList, error, isLoading} = useGetQuizzesQuery()
+function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: string, isLoading: boolean }) {
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-
-    if (error) {
-        return (
-            <div>
-                error:
-                {/*{error}*/}
-            </div>
-        )
-    }
+  if (error) {
+    return (
+      <div>
+        error:
+        {error}
+      </div>
+    )
+  }
 
     return (
         <div>
