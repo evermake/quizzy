@@ -1,6 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import QuestionInfo from './components/QuestionInfo'
+import { useNavigate, useParams } from 'react-router-dom'
 import QuizDetails from './components/QuizDetails'
 import QuestionPagination from './components/QuestionPagination'
 import Timer from './components/Timer'
@@ -8,25 +7,28 @@ import Review from './components/Review'
 import Results from './components/Results'
 import { useGetQuizByIdQuery } from '@/store/services/quizService'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { startQuiz, updateStatus, updateTime } from '@/store/reducer/quizSlice'
+import {
+  resetQuiz,
+  startQuiz,
+  updatePaginationId,
+  updateQuestionId,
+  updateStatus,
+  updateTime,
+  updateUserAnswer,
+} from '@/store/reducer/quizSlice'
 import { QuizStatus } from '@/types/state/quiz'
+import { AppRoute } from '@/constants'
+import QuestionContainer from '@/pages/QuizDetailPage/QuestionContainer/QuestionContainer'
 
 export const QuizDetailPage: React.FC = () => {
   const { slug } = useParams()
 
   const { data: quiz, error, isLoading } = useGetQuizByIdQuery(slug)
 
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const { status, questionId, quizId, time } = useAppSelector(state => state.quizState)
-
-  const handleStartClickBtn = () => {
-    dispatch(startQuiz({
-      quizId: quiz.id,
-      duration: quiz.duration,
-      questionIds: quiz.questionIds,
-    }))
-  }
+  const { status, questionId, quizId, time, userAnswers, paginationId } = useAppSelector(state => state.quizState)
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -49,7 +51,16 @@ export const QuizDetailPage: React.FC = () => {
 
   if (status === QuizStatus.NOT_STARTED) {
     return (
-      <QuizDetails quiz={quiz} handleStartClickBtn={handleStartClickBtn} />
+      <QuizDetails
+        quiz={quiz}
+        handleStartBtn={() => {
+          dispatch(startQuiz({
+            quizId: quiz.id,
+            duration: quiz.duration,
+            questionIds: quiz.questionIds,
+          }))
+        }}
+      />
     )
   }
 
@@ -64,8 +75,22 @@ export const QuizDetailPage: React.FC = () => {
             dispatch(updateTime(time - 1))
           }}
         />
-        <QuestionInfo />
-        <QuestionPagination quiz={quiz} />
+        <QuestionContainer
+          questionId={questionId}
+          userAnswers={userAnswers}
+          handleChangeAnswer={(answer, isCorrect) => dispatch(updateUserAnswer({
+            answer,
+            isCorrect,
+          }))}
+          paginationId={paginationId}
+        />
+        <QuestionPagination
+          questionIds={quiz.questionIds}
+          handlePaginateBtn={(questionId, id) => {
+            dispatch(updatePaginationId(id))
+            dispatch(updateQuestionId(questionId))
+          }}
+        />
         <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
       </div>
     )
@@ -82,12 +107,26 @@ export const QuizDetailPage: React.FC = () => {
             dispatch(updateTime(time - 1))
           }}
         />
-        <Review questionIds={quiz.questionIds} />
+        <Review
+          questionIds={quiz.questionIds}
+          userAnswers={userAnswers}
+          handleReturnBtn={() => dispatch(updateStatus(QuizStatus.IN_PROGRESS))}
+          handleFinishBtn={() => dispatch(updateStatus(QuizStatus.FINISHED))}
+        />
       </>
     )
   }
 
   if (status === QuizStatus.FINISHED) {
-    return <Results questionIds={quiz.questionIds} />
+    return (
+      <Results
+        questionIds={quiz.questionIds}
+        userAnswers={userAnswers}
+        handleResetQuizBtn={() => {
+          dispatch(resetQuiz())
+          navigate(AppRoute.HOME)
+        }}
+      />
+    )
   }
 }

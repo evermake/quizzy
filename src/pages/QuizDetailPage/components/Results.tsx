@@ -1,14 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/store'
-import { resetQuiz } from '@/store/reducer/quizSlice'
-import { AppRoute } from '@/constants'
 
-function Results({ questionIds }) {
-  const { userAnswers } = useAppSelector(state => state.quizState)
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
+function Results(
+  { questionIds, userAnswers, handleResetQuizBtn }: {
+    questionIds: number[]
+    userAnswers: { answer: string, isCorrect: boolean }
+    handleResetQuizBtn: () => void
+  },
+) {
   const emptyArr = Array.from({ length: questionIds.length }, () => 'No answer')
   const keys = Object.keys(userAnswers)
 
@@ -32,13 +30,7 @@ function Results({ questionIds }) {
       {results.map((res, id) => (<div>#{id + 1}:{res}</div>))}
 
       {Math.floor((posCounter / questionIds.length) * 100)}% of correct answers
-
-      <button onClick={() => {
-        dispatch(resetQuiz())
-        navigate(AppRoute.HOME)
-      }}
-      >reset quiz
-      </button>
+      <button onClick={() => handleResetQuizBtn()}>reset quiz</button>
     </div>
   )
 }
