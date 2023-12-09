@@ -5,12 +5,9 @@ function QuestionPagination({ questionIds, handlePaginateBtn }) {
   return (
     <PaginationContainer>
       {questionIds.map((questionId, id) => (
-        <PaginationButton
-  key={questionId}
-  onClick={() => handlePaginateBtn(questionId, id)}
->
-  {id + 1}
-</PaginationButton>
+        <PaginationButton key={questionId} onClick={() => handlePaginateBtn(questionId, id)}>
+          {id + 1}
+        </PaginationButton>
       ))}
     </PaginationContainer>
   )

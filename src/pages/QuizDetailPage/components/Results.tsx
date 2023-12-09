@@ -29,9 +29,10 @@ function Results(
     <div>
       <h2>Results</h2>
       <div>
-        {results.map((res, id) => (<div>
-          <b>№{id + 1}</b> {res}
-                                    </div>
+        {results.map((res, id) => (
+          <div>
+            <b>№{id + 1}</b> {res}
+          </div>
         ))}
         <Text>
           {Math.floor((posCounter / questionIds.length) * 100)} % of correct answers
