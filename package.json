@@ -1,7 +1,7 @@
 {
   "name": "quizzy",
   "type": "commonjs",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "MIT",
   "keywords": [],
   "main": "./src/index.tsx",
