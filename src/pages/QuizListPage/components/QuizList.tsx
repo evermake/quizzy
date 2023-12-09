@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { AppRoute } from '@/constants'
 import type { Quiz } from '@/types/models/quiz'
-import {QuizItem} from './QuizList.styled';
+import { QuizItem, StyledLink } from './QuizList.styled';
 function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: string, isLoading: boolean }) {
   if (isLoading) {
     return <div>Loading...</div>
@@ -21,11 +21,11 @@ function QuizList({ quizList, error, isLoading }: { quizList: Quiz[], error: str
     <div>
       {quizList.map(quiz => (
         <QuizItem>
-        <Link key={quiz.id} to={`${AppRoute.QUIZZES}/${quiz.id}`}>
+        <StyledLink key={quiz.id} to={`${AppRoute.QUIZZES}/${quiz.id}`}>
           <div>
             {quiz.title}
           </div>
-        </Link>
+        </StyledLink>
         </QuizItem>
       ),
       )}

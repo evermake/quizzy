@@ -9,11 +9,8 @@ export const LoadingContainer = styled.div`
 `;
 
 export const Container = styled.div`
-
-  margin:170px;
-  margin-top:50px;
-  margin-left:400px;
-  width:600px;
+  margin: 100px auto 0;
+  width: 600px;
   padding: 40px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -21,7 +18,7 @@ export const Container = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 export const Button_ = styled.button`
-  margin-top:10px;
+  margin-top: 10px;
   padding: 10px 20px;
   background-color: #e0e0e0;
   color: #333;
