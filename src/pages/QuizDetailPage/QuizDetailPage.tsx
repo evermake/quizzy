@@ -1,3 +1,8 @@
+import {
+  LoadingContainer,
+  Container,
+  Button_,
+} from '../Pages.styled'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import QuizDetails from './components/QuizDetails'
@@ -30,19 +35,18 @@ export const QuizDetailPage: React.FC = () => {
 
   const { status, questionId, quizId, time, userAnswers, paginationId } = useAppSelector(state => state.quizState)
 
+
   if (isLoading) {
-    return <div>Loading...</div>
+    return <LoadingContainer>Loading...</LoadingContainer>
   }
 
   if (error) {
     return (
       <div>
-        Error:
-        {error}
+        Error: {error}
       </div>
     )
   }
-
   if (quizId && quiz.id !== quizId) {
     return (
       <h2>You have another active quiz now</h2>
@@ -51,47 +55,53 @@ export const QuizDetailPage: React.FC = () => {
 
   if (status === QuizStatus.NOT_STARTED) {
     return (
-      <QuizDetails
-        quiz={quiz}
-        handleStartBtn={() => {
-          dispatch(startQuiz({
-            quizId: quiz.id,
-            duration: quiz.duration,
-            questionIds: quiz.questionIds,
-          }))
-        }}
-      />
+      <Container>
+        <QuizDetails
+          quiz={quiz}
+          handleStartBtn={() => {
+            dispatch(startQuiz({
+              quizId: quiz.id,
+              duration: quiz.duration,
+              questionIds: quiz.questionIds,
+            }))
+          }}
+        />
+      </Container>
     )
   }
 
   if (status === QuizStatus.IN_PROGRESS && questionId) {
     return (
       <div>
-        <Timer
-          time={time}
-          finishQuiz={() =>
-            dispatch(updateStatus(QuizStatus.FINISHED))}
-          updateTimer={() => {
-            dispatch(updateTime(time - 1))
-          }}
-        />
-        <QuestionContainer
-          questionId={questionId}
-          userAnswers={userAnswers}
-          handleChangeAnswer={(answer, isCorrect) => dispatch(updateUserAnswer({
-            answer,
-            isCorrect,
-          }))}
-          paginationId={paginationId}
-        />
-        <QuestionPagination
-          questionIds={quiz.questionIds}
-          handlePaginateBtn={(questionId, id) => {
-            dispatch(updatePaginationId(id))
-            dispatch(updateQuestionId(questionId))
-          }}
-        />
-        <button onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>Finish attempt</button>
+        <Container>
+          <Timer
+            time={time}
+            finishQuiz={() =>
+              dispatch(updateStatus(QuizStatus.FINISHED))}
+            updateTimer={() => {
+              dispatch(updateTime(time - 1))
+            }}
+          />
+          <QuestionContainer
+            questionId={questionId}
+            userAnswers={userAnswers}
+            handleChangeAnswer={(answer, isCorrect) => dispatch(updateUserAnswer({
+              answer,
+              isCorrect,
+            }))}
+            paginationId={paginationId}
+          />
+          <QuestionPagination
+            questionIds={quiz.questionIds}
+            handlePaginateBtn={(questionId, id) => {
+              dispatch(updatePaginationId(id))
+              dispatch(updateQuestionId(questionId))
+            }}
+          />
+          <Button_ onClick={() => dispatch(updateStatus(QuizStatus.REVIEW))}>
+            Finish attempt
+          </Button_>
+        </Container>
       </div>
     )
   }
@@ -99,34 +109,41 @@ export const QuizDetailPage: React.FC = () => {
   if (status === QuizStatus.REVIEW) {
     return (
       <>
-        <Timer
-          time={time}
-          finishQuiz={() =>
-            dispatch(updateStatus(QuizStatus.FINISHED))}
-          updateTimer={() => {
-            dispatch(updateTime(time - 1))
-          }}
-        />
-        <Review
-          questionIds={quiz.questionIds}
-          userAnswers={userAnswers}
-          handleReturnBtn={() => dispatch(updateStatus(QuizStatus.IN_PROGRESS))}
-          handleFinishBtn={() => dispatch(updateStatus(QuizStatus.FINISHED))}
-        />
+        <Container>
+          <Timer
+            time={time}
+            finishQuiz={() =>
+              dispatch(updateStatus(QuizStatus.FINISHED))}
+            updateTimer={() => {
+              dispatch(updateTime(time - 1))
+            }}
+          />
+          <Review
+            questionIds={quiz.questionIds}
+            userAnswers={userAnswers}
+            handleReturnBtn={() => dispatch(updateStatus(QuizStatus.IN_PROGRESS))}
+            handleFinishBtn={() => dispatch(updateStatus(QuizStatus.FINISHED))}
+
+          />
+        </Container>
       </>
+
     )
   }
 
   if (status === QuizStatus.FINISHED) {
     return (
-      <Results
-        questionIds={quiz.questionIds}
-        userAnswers={userAnswers}
-        handleResetQuizBtn={() => {
-          dispatch(resetQuiz())
-          navigate(AppRoute.HOME)
-        }}
-      />
+      <Container>
+        <Results
+          questionIds={quiz.questionIds}
+          userAnswers={userAnswers}
+          handleResetQuizBtn={() => {
+            dispatch(resetQuiz())
+            navigate(AppRoute.HOME)
+          }}
+        />
+      </Container>
     )
+
   }
-}
+} 

@@ -1,22 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { PaginationContainer, PaginationButton } from './QuestionPagination.styled';
 
 function QuestionPagination({ questionIds, handlePaginateBtn }) {
   return (
-    <div>
-      {questionIds.map((questionId, id) => {
-        return (
-          <button
-            key={questionId}
-            onClick={() => handlePaginateBtn(questionId, id)}
-          >
-            {id + 1}
-          </button>
-        )
-      },
-      )}
-
-    </div>
-  )
+    <PaginationContainer>
+      {questionIds.map((questionId, id) => (
+        <PaginationButton
+          key={questionId}
+          onClick={() => handlePaginateBtn(questionId, id)}
+        >
+          {id + 1}
+        </PaginationButton>
+      ))}
+    </PaginationContainer>
+  );
 }
 
-export default QuestionPagination
+export default QuestionPagination;

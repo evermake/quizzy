@@ -1,5 +1,11 @@
+import styled from '@emotion/styled';
 import React from 'react'
+import {Button_} from './Button.styled';
 
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px; 
+`;
 function Review(
   {
     questionIds,
@@ -29,8 +35,10 @@ function Review(
       <h2>Review quiz</h2>
       {answers.map((answer, id) => (<div>#{id + 1}:{answer}</div>
       ))}
-      <button onClick={handleReturnBtn}>Return to quiz</button>
-      <button onClick={handleFinishBtn}>Finish</button>
+      <ButtonsContainer>
+      <Button_ onClick={handleReturnBtn}>Return to quiz</Button_>
+      <Button_ onClick={handleFinishBtn}>Finish</Button_>
+      </ButtonsContainer>
     </div>
   )
 }
