@@ -32,6 +32,7 @@ function Results(
         {results.map((res, id) => (
           <div>
             <b>№{id + 1}</b> {res}
+
           </div>
         ))}
         <Text>
