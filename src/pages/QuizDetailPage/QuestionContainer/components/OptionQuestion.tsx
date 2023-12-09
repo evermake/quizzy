@@ -1,13 +1,11 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import React, { useState } from 'react';
-import type { Question } from '@/types/models/question';
-
+import styled from '@emotion/styled'
+import React, { useState } from 'react'
+import type { Question } from '@/types/models/question'
 
 const AnswerList = styled.ul`
   list-style: none;
   padding: 0;
-`;
+`
 
 const AnswerItem = styled.li`
   cursor: pointer;
@@ -20,7 +18,7 @@ const AnswerItem = styled.li`
   &:hover {
     background-color: #d0d0d0;
   }
-`;
+`
 
 function OptionQuestion({ question, handleChangeAnswer, userAnswers, paginationId }: {
   question: Question
@@ -28,7 +26,7 @@ function OptionQuestion({ question, handleChangeAnswer, userAnswers, paginationI
   userAnswers: NonNullable<unknown>
   paginationId: number
 }) {
-  const [userAnswer, setAnswer] = useState<string>('');
+  const [userAnswer, setAnswer] = useState<string>('')
 
   return (
     <div>
@@ -38,8 +36,8 @@ function OptionQuestion({ question, handleChangeAnswer, userAnswers, paginationI
           <AnswerItem
             key={answer}
             onClick={() => {
-              setAnswer(answer);
-              handleChangeAnswer(answer, answer === question.correctAnswer);
+              setAnswer(answer)
+              handleChangeAnswer(answer, answer === question.correctAnswer)
             }}
           >
             {answer}
@@ -47,11 +45,11 @@ function OptionQuestion({ question, handleChangeAnswer, userAnswers, paginationI
         ))}
       </AnswerList>
       <div>
-        Current answer: 
+        Current answer:
         {userAnswers[paginationId]?.answer ?? userAnswer}
       </div>
-      </div>
-  );
+    </div>
+  )
 }
 
-export default OptionQuestion;
+export default OptionQuestion

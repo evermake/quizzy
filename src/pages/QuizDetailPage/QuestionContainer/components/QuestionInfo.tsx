@@ -1,9 +1,8 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import React from 'react';
-import type { Question } from '@/types/models/question';
-import OptionQuestion from '@/pages/QuizDetailPage/QuestionContainer/components/OptionQuestion';
-import ShortQuestion from '@/pages/QuizDetailPage/QuestionContainer/components/ShortQuestion';
+import styled from '@emotion/styled'
+import React from 'react'
+import type { Question } from '@/types/models/question'
+import OptionQuestion from '@/pages/QuizDetailPage/QuestionContainer/components/OptionQuestion'
+import ShortQuestion from '@/pages/QuizDetailPage/QuestionContainer/components/ShortQuestion'
 
 const Container = styled.div`
   width:500px;
@@ -12,7 +11,7 @@ const Container = styled.div`
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+`
 
 function QuestionInfo({
   question,
@@ -22,15 +21,15 @@ function QuestionInfo({
   handleChangeAnswer,
   userAnswers,
 }: {
-  question: Question;
-  error: string;
-  isLoading: boolean;
-  handleChangeAnswer: (answer: string, isCorrect: boolean) => void;
-  paginationId: number;
-  userAnswers: NonNullable<unknown>;
+  question: Question
+  error: string
+  isLoading: boolean
+  handleChangeAnswer: (answer: string, isCorrect: boolean) => void
+  paginationId: number
+  userAnswers: NonNullable<unknown>
 }) {
   if (isLoading) {
-    return <Container>Loading...</Container>;
+    return <Container>Loading...</Container>
   }
 
   if (error) {
@@ -38,7 +37,7 @@ function QuestionInfo({
       <Container>
         Error: {error}
       </Container>
-    );
+    )
   }
 
   if (question && question.type === 'option') {
@@ -51,7 +50,7 @@ function QuestionInfo({
           userAnswers={userAnswers}
         />
       </Container>
-    );
+    )
   }
 
   if (question && question.type === 'short') {
@@ -64,10 +63,10 @@ function QuestionInfo({
           userAnswers={userAnswers}
         />
       </Container>
-    );
+    )
   }
 
-  return null;
+  return null
 }
 
-export default QuestionInfo;
+export default QuestionInfo

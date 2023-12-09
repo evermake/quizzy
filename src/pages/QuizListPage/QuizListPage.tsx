@@ -1,7 +1,7 @@
 import React from 'react'
+import { Container } from '../Pages.styled'
 import QuizList from './components/QuizList'
 import { useGetQuizzesQuery } from '@/store/services/quizService'
-import { Container } from '../Pages.styled';
 
 export const QuizListPage: React.FC = () => {
   const { data: quizList, error, isLoading } = useGetQuizzesQuery()

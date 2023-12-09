@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { Link } from "react-router-dom";
+import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 export const QuizItem = styled.div`
 cursor: pointer;
@@ -13,7 +13,7 @@ transition: background-color 0.3s ease;
 &:hover {
   background-color: #d0d0d0;
 }
-`;
+`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;

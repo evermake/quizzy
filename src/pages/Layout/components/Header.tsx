@@ -1,14 +1,13 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '@/constants';
-import React from 'react';
+import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
+import React from 'react'
+import { AppRoute } from '@/constants'
 
 const HeaderContainer = styled.header`
   padding: 30px;
   background-color: #333;
   color: #fff;
-`;
+`
 
 const HomeLink = styled(Link)`
   color: #fff;
@@ -19,7 +18,7 @@ const HomeLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
-`;
+`
 
 function Header() {
   return (
@@ -28,7 +27,7 @@ function Header() {
         Home
       </HomeLink>
     </HeaderContainer>
-  );
+  )
 }
 
-export default Header;
+export default Header

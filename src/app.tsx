@@ -1,8 +1,8 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { getNavigationsValue } from '@ijl/cli'
-import { MantineProvider, DEFAULT_THEME } from '@mantine/core';
-import '@mantine/core/styles.css';
+import { DEFAULT_THEME, MantineProvider } from '@mantine/core'
+import '@mantine/core/styles.css'
 import { Provider } from 'react-redux'
 import store from '@/store'
 import { Layout } from '@/pages/Layout/Layout'

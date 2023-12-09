@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 const TimerContainer = styled.div`
   margin-bottom: 10px;
@@ -14,7 +13,7 @@ const TimerContainer = styled.div`
   align-items: center;
   text-align: center;
   font-size: 16px;
-`;
+`
 
 function Timer({ time, updateTimer, finishQuiz }: { time: number, updateTimer: () => void, finishQuiz: () => void }) {
   useEffect(() => {

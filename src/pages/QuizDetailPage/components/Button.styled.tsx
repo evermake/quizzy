@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 export const Button_ = styled.button`
   margin-top: 10px;
@@ -13,4 +13,4 @@ export const Button_ = styled.button`
   &:hover {
     background-color: #d0d0d0;
   }
-`;
+`

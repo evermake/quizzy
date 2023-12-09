@@ -1,10 +1,10 @@
-import {
-  LoadingContainer,
-  Container,
-  Button_,
-} from '../Pages.styled'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import {
+  Button_,
+  Container,
+  LoadingContainer,
+} from '../Pages.styled'
 import QuizDetails from './components/QuizDetails'
 import QuestionPagination from './components/QuestionPagination'
 import Timer from './components/Timer'
@@ -34,7 +34,6 @@ export const QuizDetailPage: React.FC = () => {
   const dispatch = useAppDispatch()
 
   const { status, questionId, quizId, time, userAnswers, paginationId } = useAppSelector(state => state.quizState)
-
 
   if (isLoading) {
     return <LoadingContainer>Loading...</LoadingContainer>
@@ -144,6 +143,5 @@ export const QuizDetailPage: React.FC = () => {
         />
       </Container>
     )
-
   }
-} 
+}

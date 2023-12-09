@@ -1,8 +1,9 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
+
 export const PaginationContainer = styled.div`
   display: flex;
   margin-top: 10px;
-`;
+`
 export const PaginationButton = styled.button`
   padding: 8px 16px;
   margin: 0 4px;
@@ -15,4 +16,4 @@ export const PaginationButton = styled.button`
   &:hover {
     background-color: #d0d0d0;
   }
-`;
+`

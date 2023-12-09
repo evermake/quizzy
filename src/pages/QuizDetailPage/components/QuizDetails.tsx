@@ -1,13 +1,13 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 import React from 'react'
+import { Button_ } from './Button.styled'
 import type { Quiz } from '@/types/models/quiz'
-import {Button_} from './Button.styled'; 
 
 const QuizTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-`;
+`
 function QuizDetails({ quiz, handleStartBtn }: { quiz: Quiz, handleStartBtn: () => void }) {
   return (
     <div>
