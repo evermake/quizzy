@@ -1,4 +1,19 @@
 import React, { useEffect } from 'react'
+import styled from '@emotion/styled'
+
+const TimerContainer = styled.div`
+  margin-bottom: 10px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+`
 
 function Timer({ time, updateTimer, finishQuiz }: { time: number, updateTimer: () => void, finishQuiz: () => void }) {
   useEffect(() => {
@@ -18,9 +33,11 @@ function Timer({ time, updateTimer, finishQuiz }: { time: number, updateTimer: (
   const seconds = time - minutes * 60
 
   return (
-    <div>
-      {minutes}:{seconds}
-    </div>
+    <TimerContainer>
+      <div>
+        {minutes}:{seconds}
+      </div>
+    </TimerContainer>
   )
 }
 

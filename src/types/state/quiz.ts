@@ -7,10 +7,12 @@ export enum QuizStatus {
 }
 
 export type QuizState = {
-  status: QuizStatus.NOT_STARTED | QuizStatus.IN_PROGRESS | QuizStatus.FINISHED
+  status: QuizStatus
   userAnswers: NonNullable<unknown>
   userAnswersWithQuestionIds?: NonNullable<unknown>
   time?: number
-  currentQuestionId?: number
+  questionId?: number
+  quizId?: number
+  questionIds?: number
   paginationId?: number
 }

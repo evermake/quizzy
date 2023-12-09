@@ -8,6 +8,7 @@ module.exports = antfu(
       'style/brace-style': ['error', '1tbs'],
       'ts/consistent-type-definitions': ['error', 'type'],
       'style/jsx-one-expression-per-line': ['off'],
+      'antfu/consistent-list-newline': ['off'],
     },
   },
 )

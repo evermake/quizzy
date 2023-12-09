@@ -1,14 +1,21 @@
+import styled from '@emotion/styled'
 import React from 'react'
+import { Button_ } from './Button.styled'
 import type { Quiz } from '@/types/models/quiz'
 
+const QuizTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`
 function QuizDetails({ quiz, handleStartBtn }: { quiz: Quiz, handleStartBtn: () => void }) {
   return (
     <div>
-      <div>
+      <QuizTitle>
         {quiz.title}
-      </div>
+      </QuizTitle>
       <div>
-        description:
+        Description:
         {quiz.descr}
       </div>
       <div>
@@ -23,9 +30,9 @@ function QuizDetails({ quiz, handleStartBtn }: { quiz: Quiz, handleStartBtn: () 
         quiz.questionIds.length === 0
         && <h2>no questions in quiz</h2>
       }
-      <button onClick={handleStartBtn} disabled={quiz.questionIds.length === 0}>
+      <Button_ onClick={handleStartBtn} disabled={quiz.questionIds.length === 0}>
         Start Quiz
-      </button>
+      </Button_>
     </div>
   )
 }

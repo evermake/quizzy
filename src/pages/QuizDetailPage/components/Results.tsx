@@ -1,4 +1,6 @@
 import React from 'react'
+import { Text } from '@mantine/core'
+import { Button_ } from './Button.styled'
 
 function Results(
   { questionIds, userAnswers, handleResetQuizBtn }: {
@@ -26,11 +28,18 @@ function Results(
   return (
     <div>
       <h2>Results</h2>
+      <div>
+        {results.map((res, id) => (
+          <div>
+            <b>№{id + 1}</b> {res}
 
-      {results.map((res, id) => (<div>#{id + 1}:{res}</div>))}
-
-      {Math.floor((posCounter / questionIds.length) * 100)}% of correct answers
-      <button onClick={() => handleResetQuizBtn()}>reset quiz</button>
+          </div>
+        ))}
+        <Text>
+          {Math.floor((posCounter / questionIds.length) * 100)} % of correct answers
+        </Text>
+      </div>
+      <Button_ onClick={() => handleResetQuizBtn()}>Reset quiz</Button_>
     </div>
   )
 }
